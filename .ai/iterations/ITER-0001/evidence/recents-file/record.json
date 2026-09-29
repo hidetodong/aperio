@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "evidence_id": "recents-file",
+  "iteration": "ITER-0001",
+  "ac_ids": [
+    "AC2"
+  ],
+  "command": {
+    "argv": [
+      "python3",
+      "-c",
+      "import json; from pathlib import Path; p = Path.home()/\"Library/Application Support/local.emerge.app/recents.json\"; data = json.loads(p.read_text()); assert data and set(data[0])=={\"path\",\"name\",\"openedAt\"}; assert isinstance(data[0][\"openedAt\"], int); assert Path(data[0][\"path\"]).is_file(); print(\"count\", len(data), \"fields_ok\", True, \"file_exists\", True)"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-29T08:19:16.965Z",
+  "finished_at": "2026-09-29T08:19:17.001Z",
+  "duration_ms": 36,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 40,
+    "captured_bytes": 40,
+    "sha256": "85f819fedf1b6c0e44ee4798f927ff8547c742e8e5d88e3c55293568f6a532d5",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

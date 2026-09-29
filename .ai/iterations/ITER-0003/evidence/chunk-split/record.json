@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "evidence_id": "chunk-split",
+  "iteration": "ITER-0003",
+  "ac_ids": [
+    "AC2"
+  ],
+  "command": {
+    "argv": [
+      "node",
+      "scripts/check-chunks.mjs"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-29T14:57:40.229Z",
+  "finished_at": "2026-09-29T14:57:40.300Z",
+  "duration_ms": 71,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 46,
+    "captured_bytes": 46,
+    "sha256": "f5016a3886fb4c96e6352996e475ea4f758ed6d02ca6efdadf904570d29d2972",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

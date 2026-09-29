@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--
+  固定格式交付总结 · HTML 阅读视图
+  引用真源：同目录 ITER-0001-window-image-text.md
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITER-0001 交付总结 · 窗口壳、最近打开、图片和文本</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>窗口壳、最近打开、图片和文本</h1>
+      <div class="meta">
+        <span class="chip id">ITER-0001</span>
+        <span class="chip level">迭代交付（小版本）</span>
+        <span class="chip date">收口 2026-09-29</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>在自己的 Mac 上打开浮现，拖进或选中图片和文本就能看，最近打开过的文件会留下来。这一段由模型自主确认验收和方案，没有逐项等人点头。收口前做了完整审查，结论是可以通过，没有必须先改才能交付的问题。审查是在同一段上下文里做的。项目没有打开独立复核，所以这不是另一份干净上下文的复查。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul>
+        <li>窗口可以点按钮打开文件，也可以把文件拖进来。看完能回到最近列表。</li>
+        <li>最近列表同一路径只留一条，最新在前，最多 20 条。列表写在本机应用数据目录，重启后还在。文件已经不在时说明原因，并清掉上一份内容。</li>
+        <li>图片支持 jpg、jpeg、png、gif、webp、svg、heic、heif。HEIC 和 HEIF 用系统自带的 sips 转成 PNG，页面拿不到原始字节。</li>
+        <li>Markdown 会排版并去掉脚本。HTML 放在不允许脚本的框架里。其余纯文本按原文显示。只有约定的那几种语言会高亮。</li>
+        <li>启用名单只打开图片和文本。PDF、Office、压缩包和影音会显示不支持，也不会去加载对应查看器。</li>
+        <li>同一时间只保留当前这一份文件。文本超过 2MB 会拒绝并说明原因。</li>
+      </ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>拖一张图或一份 Markdown 进来就能看。侧栏能点回最近开过的文件。还不支持的格式会直接说明，不会装出已经打开的样子。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>界面在 <code>src/</code>，读文本和 HEIC 解码在 <code>src-tauri/</code>。图片查看器和文本查看器分开加载，不打进主包。这一段不做 PDF、Office、压缩包、影音，也不做编辑、对外分发、付费或自动更新。</p>
+    </section>
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>验收 AC1 到 AC7 都有机器记录，结论是通过。记录在 <a href="../iterations/ITER-0001/evidence/"><code>.ai/iterations/ITER-0001/evidence/</code></a>。审查时又重跑了前端测试和 Rust 测试。开发窗口里拖入过一张 PNG，能看到内容和同一条最近记录。HEIC 只在解码命令里用系统样例跑通，没有在窗口里再打开一次。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul>
+        <li>HEIC 没有在窗口里再打开一次。</li>
+        <li>冷启动到能接拖放没有用秒表量。空窗口时主进程大约 32MB，打开一张照片后大约 38MB。系统网页视图是另一个进程，没有合成成一个总账。80MB 不是这一段的通过线。</li>
+        <li>依赖审计还有 3 条告警，没有强制升级。</li>
+        <li>Markdown 消毒后仍可能留下样式标签。样式改的是样子，不是执行脚本。</li>
+        <li>最近列表写入失败时界面不提示。重启后以磁盘上的那份为准。</li>
+        <li>本地资源协议开得比较宽，靠页面不执行脚本来兜。这是方案里已经接受的取舍。</li>
+        <li>PDF、Office、压缩包和影音还在后面的路线里，这一段没有做。</li>
+        <li>收口之后的代码审查又看到三处：真窗口里，本机返回的失败原因会被收成「打不开」；已经删掉的普通图片仍会进最近列表；后返回的上一次打开可能盖掉新文件。归档里的验收记录保持收口当时的样子，不回头改。这三处交给下一段修。</li>
+      </ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul>
+        <li><a href="../iterations/ITER-0001/CONCEPT.md"><code>.ai/iterations/ITER-0001/CONCEPT.md</code></a></li>
+        <li><a href="../iterations/ITER-0001/AC_LIST.md"><code>.ai/iterations/ITER-0001/AC_LIST.md</code></a></li>
+        <li><a href="../iterations/ITER-0001/TECH_PLAN.md"><code>.ai/iterations/ITER-0001/TECH_PLAN.md</code></a></li>
+        <li><a href="../iterations/ITER-0001/VERIFY_REPORT.md"><code>.ai/iterations/ITER-0001/VERIFY_REPORT.md</code></a></li>
+        <li><a href="../iterations/ITER-0001/CHANGELOG.md"><code>.ai/iterations/ITER-0001/CHANGELOG.md</code></a></li>
+        <li><a href="../iterations/ITER-0001/evidence/"><code>.ai/iterations/ITER-0001/evidence/</code></a></li>
+        <li>回退点 <code>b2fdebfcf7059d922074f3bda02d5d6c482f6c70</code>（写代码前的文档提交。应用源码不在这次提交里。）</li>
+      </ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

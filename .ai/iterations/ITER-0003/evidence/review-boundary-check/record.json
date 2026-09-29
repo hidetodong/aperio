@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "evidence_id": "review-boundary-check",
+  "iteration": "ITER-0003",
+  "ac_ids": [
+    "AC1",
+    "AC2"
+  ],
+  "command": {
+    "argv": [
+      "node",
+      "scripts/check-boundaries.mjs"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-29T14:58:36.431Z",
+  "finished_at": "2026-09-29T14:58:36.471Z",
+  "duration_ms": 40,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 28,
+    "captured_bytes": 28,
+    "sha256": "2b07f725bfe3501419ae8d2fc655df12b42cb5745f090e85ddff57f586a28c11",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

@@ -1,46 +1,60 @@
 {
-  "handoff_sha256": "35da7b4adc95486b9985fdf7a6f0f79f5f02de6364151a661625b93977b26412",
+  "handoff_sha256": "6a60d172b78a2d9ac8be1f4fbd00d2c735334f3e5860033dea13adc4cd5dedaa",
   "schema_version": 1,
   "snapshot": {
     "decisions": [
-      "浮现第一段只做自己 Mac 上的轻窗口：拖进文件就能看图片和文本，记住最近打开的，格式按家族用到才加载。PDF、Office、压缩包和影音不在这一段。",
-      "已确认：产品名是浮现，英文 Emerge，工程目录是 emerge",
-      "已确认：只给自己在 Mac 上用，不对外分发"
+      "压缩包用已经在依赖里的 JSZip 读名单和单个条目。影音只把地址交给页面里的视频或音频标签，不把整份读成文本。被放弃的做法是在 Rust 里加压缩或影音库，因为格式解析约定留在前端，影音又本来就交给系统。",
+      "查看器分成两块，用到才加载。打开压缩包时不顺带把影音放进主包。启用名单把 zip 和 media 打开，原来开着的四个家族不动。",
+      "压缩包字节仍由页面通过已经允许的地址去取，不新增 Rust 读全文件的命令。浏览器里先看文件大小，超过 20MB 不交给解析。本机路径仍是先确认文件，取到字节后再按大小拒绝。"
     ],
-    "iteration": "ITER-0001",
+    "iteration": "ITER-0005",
     "milestone": "MILE-0001",
-    "next": "审阅 `.ai/CONCEPT.md`，确认后进入 P2。",
-    "phase": "P1 Analysis",
+    "next": "按方案实现 ZIP 名单、包内预览和 MP4、MOV、MP3 播放。不改 PDF 成功不进最近列表，也不改已收口的 Office。",
+    "phase": "P3 方案已锁定",
     "pointers": [
       ".ai/task-state.md",
       ".ai/ITERATIONS.md",
       ".ai/MILESTONES.md",
       ".ai/MILESTONE.md",
-      ".ai/CONCEPT.md"
+      ".ai/CONCEPT.md",
+      ".ai/AC_LIST.md",
+      ".ai/TECH_PLAN.md"
     ],
-    "risks": [],
-    "status": "已从会话结晶需求，等待确认 Current Understanding 与 Scope。"
+    "risks": [
+      "真窗口没点之前，不能说系统窗口里已经能播。",
+      "内容安全策略改完，要重启应用窗口才生效。只刷新页面不够。",
+      "未压缩大小若只能在取出之后看到，内存可能先涨一下。这种条目仍然不能交给查看器。"
+    ],
+    "status": "压缩包和影音的验收、方案已自主锁定。代码还没改。"
   },
   "sources": [
     {
       "path": ".ai/task-state.md",
-      "sha256": "7053be464001657c903222b989018b9f0142a2f5bcdc761efd1b90063d00fb15"
+      "sha256": "ee7ff61333ef583096e725ca34a012a48abb9c53d724563a0baf87efcee5ff02"
     },
     {
       "path": ".ai/ITERATIONS.md",
-      "sha256": "762233e14be0f4cec3f8048e52f8bf76372f574f72241c9e7590325c6411dfe1"
+      "sha256": "b39af497a04cd3a487e2013e3e8833b06690bd13d2f9baf780d3313fd70f9741"
     },
     {
       "path": ".ai/MILESTONES.md",
-      "sha256": "3c0e25c28e9c3ad81c66ca85f9022fcffa397f6a7ff8048a0628f87adf4bc5e1"
+      "sha256": "ad351988398736c9852ccef75ada9de7b45c09752f52d17eb0d1d8f9adf0d718"
     },
     {
       "path": ".ai/MILESTONE.md",
-      "sha256": "b73c9181bfd22c8bf8aca46b930a4d00e9ab04bf7601e49364689181dac5a6b7"
+      "sha256": "403e55a2074277d2919b909c63a9f4d9b15ec57e74693059f43e115972cda85f"
     },
     {
       "path": ".ai/CONCEPT.md",
-      "sha256": "1a8dd6e953c1e607e7118d1b528dc011e0feab76c2c6f9f5a679ceee41890cd8"
+      "sha256": "79272e8c418dc6522b414c5d748907f897dbc44ec7bac565a82d8576909772ee"
+    },
+    {
+      "path": ".ai/AC_LIST.md",
+      "sha256": "decfffc72987dd67bb35a71b83578f57ca5b82bc6829e690f79600eb670af1e2"
+    },
+    {
+      "path": ".ai/TECH_PLAN.md",
+      "sha256": "0904395b10426e4bfbe06ff72099727ac49a944a35bdbf027c7173427270ab19"
     }
   ]
 }

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "evidence_id": "frontend-build",
+  "iteration": "ITER-0004",
+  "ac_ids": [
+    "AC2"
+  ],
+  "command": {
+    "argv": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-29T15:20:39.791Z",
+  "finished_at": "2026-09-29T15:20:41.249Z",
+  "duration_ms": 1457,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 15581,
+    "captured_bytes": 15581,
+    "sha256": "91f2f592d7e5affa271ef7f7e0eae57f6f8c1ddbe12b32d92874008b0488d89c",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 164,
+    "captured_bytes": 164,
+    "sha256": "869c917a4cc805305143da043806d41659d784d146fb70bae6b461048f69aee8",
+    "truncated": false
+  }
+}

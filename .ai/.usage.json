@@ -1,31 +1,37 @@
 {
   "entries": {
     "tool:artifact-pipeline": {
-      "last_used": "2026-09-29T06:35:49Z"
+      "last_used": "2026-09-29T08:29:15Z"
+    },
+    "tool:goal-assurance": {
+      "last_used": "2026-09-29T15:32:49Z"
     },
     "tool:handoff": {
-      "last_used": "2026-09-29T06:25:32Z"
+      "last_used": "2026-09-29T15:49:01Z"
     },
     "tool:iteration-intake": {
-      "last_used": "2026-09-29T06:25:32Z"
+      "last_used": "2026-09-29T15:45:32Z"
     },
     "tool:project-config": {
-      "last_used": "2026-09-29T06:34:25Z"
+      "last_used": "2026-09-29T15:44:23Z"
     },
     "tool:state-ledger": {
-      "last_used": "2026-09-29T06:25:32Z"
+      "last_used": "2026-09-29T15:49:01Z"
     },
     "tool:usage": {
-      "last_used": "2026-09-29T06:32:20Z"
+      "last_used": "2026-09-29T15:44:23Z"
+    },
+    "tool:verification-evidence": {
+      "last_used": "2026-09-29T15:44:39Z"
     },
     "workflow:dangerous": {
-      "last_used": "2026-09-29T06:32:20Z"
+      "last_used": "2026-09-29T15:44:23Z"
     },
     "workflow:init": {
       "last_used": "2026-09-29T06:19:53Z"
     },
     "workflow:iteration": {
-      "last_used": "2026-09-29T06:25:28Z"
+      "last_used": "2026-09-29T15:44:23Z"
     },
     "workflow:milestone": {
       "last_used": "2026-09-29T06:19:53Z"

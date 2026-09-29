@@ -1,0 +1,155 @@
+:root {
+  color: #1c1917;
+  background: #f6f3ee;
+  font-family: system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+}
+
+button, input { font: inherit; }
+
+.shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+}
+
+aside {
+  padding: 20px 16px;
+  border-right: 1px solid #e4ddd2;
+  background: #fffdf9;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 560;
+}
+
+aside button, .label, .muted, .name {
+  display: block;
+}
+
+aside > button, aside li button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+aside > button {
+  border: 1px solid #d6d0c6;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fff;
+}
+
+.label {
+  margin: 22px 0 8px;
+  color: #78716c;
+  font-size: 13px;
+}
+
+.muted, .drop {
+  color: #78716c;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 28px;
+  min-width: 0;
+}
+
+main.over {
+  outline: 2px dashed #a8a29e;
+  outline-offset: -12px;
+}
+
+.name {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: #57534e;
+}
+
+.error {
+  color: #9f1239;
+}
+
+img, iframe, pre, article {
+  max-width: 100%;
+}
+
+img {
+  max-height: 80vh;
+}
+
+iframe {
+  width: 100%;
+  min-height: 70vh;
+  border: 0;
+  background: white;
+}
+
+pre {
+  white-space: pre-wrap;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+}
+
+.hljs-keyword { color: #0550ae; }
+.hljs-string { color: #0a3069; }
+.hljs-comment { color: #57606a; }
+.hljs-number { color: #953800; }
+.hljs-title, .hljs-function { color: #6639ba; }
+
+.pdf-scroll {
+  height: calc(100vh - 96px);
+  overflow: auto;
+  background: #ebe6dc;
+}
+
+.pdf-page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pdf-page canvas {
+  background: white;
+  box-shadow: 0 1px 4px rgba(28, 25, 23, 0.12);
+}
+
+.office-scroll {
+  height: calc(100vh - 96px);
+  overflow: auto;
+}
+
+.office-table {
+  border-collapse: collapse;
+  background: white;
+}
+
+.office-table td {
+  border: 1px solid #e4ddd2;
+  padding: 4px 8px;
+  vertical-align: top;
+}
+
+@media (max-width: 700px) {
+  .shell { grid-template-columns: 1fr; }
+  aside { border-right: 0; border-bottom: 1px solid #e4ddd2; }
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+  固定格式交付总结 · HTML 阅读视图
+  引用真源：同目录 ITER-0002-last-open.md
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITER-0002 交付总结 · 打开失败说清原因，只认最后一次打开</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>打开失败说清原因，只认最后一次打开</h1>
+      <div class="meta">
+        <span class="chip id">ITER-0002</span>
+        <span class="chip level">迭代交付（小版本）</span>
+        <span class="chip date">收口 2026-09-29</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>在自己的 Mac 上，打开失败时要看到原来的原因，已经不在的文件不要装成打开成功，连续打开时只留下最后一次。这一段由模型自主确认验收和方案，没有逐项等人点头。收口前做了完整审查。审查发现清理缓存的时机不对，已经改完并重新测过。审查是在同一段上下文里做的，不是另一份干净上下文的复查。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul>
+<li>本机返回的失败原因会原样显示，不再一律收成「打不开」。最近列表不因此多一条，上一份内容会清掉。</li>
+<li>打开 jpg、png 这类普通图片之前，先确认这是一个还在的文件。文件不在，或路径是目录时，说明原因，不写入最近列表。</li>
+<li>连续打开只留下最后一次的画面和最近列表。最近列表还没从磁盘读完时，打开先排队，不会用空列表盖掉磁盘上的记录。读失败时画面仍可打开，但不会把空列表写回去。</li>
+<li>HEIC 解码只写出一张新图。只有这次结果被采纳，才会清理缓存里的其他 png，并且不会去删缓存目录以外的文件。更早的解码即使后返回，也不会把更新的那张图删掉。</li>
+<li>解码程序固定为 <code>/usr/bin/sips</code>，参数是数组，不经过外壳拼接。</li>
+<li>点 Markdown 里的链接，包括点在链接文字上，当前窗口不会因此跳走。</li>
+</ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>失败会说出原因。已经删掉的图片不会再出现在最近打开里。快速连开两个文件时，后返回的那次盖不住新的。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>改动在打开流程、HEIC 缓存清理和 Markdown 点击。启用名单仍然只有图片和文本。没有做 PDF、Office、压缩包和影音。没有重开上一段，也没有改它的归档。</p>
+    </section>
+
+    
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>验收 AC1 到 AC6 都有机器记录，结论是通过。记录在 <a href="../iterations/ITER-0002/evidence/"><code>.ai/iterations/ITER-0002/evidence/</code></a>。前端 24 项、Rust 6 项都通过。审查时读过这两份输出。没有在真窗口里再连续点两个文件，HEIC 也没有在窗口里再打开一次。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul>
+<li>真窗口里没有再连续打开两个文件，也没有再打开一次 HEIC。单测钉住了验收里写的动作，不能当成已经在窗口里点过。这不卡后面的 PDF。</li>
+<li>清理紧跟在画面状态提交之后。新图可能还没画出来，上一张缓存图就已经删了。要显示的那张会留下。若系统还要重读上一张，可能会闪一下。</li>
+<li>被丢掉的 HEIC 如果更晚写完，会留下一张不再显示的缓存图。下次成功打开才会清掉。</li>
+<li>浏览器拖放没有本机路径，缺文件这条不覆盖它。</li>
+<li>Markdown 链接点击被拦住，链接文字还在。中键没有另测。消毒后仍可能留下样式标签，样式不执行脚本。</li>
+<li>最近列表写入失败时界面不提示。</li>
+<li>依赖审计还有告警，没有强制升级。</li>
+<li>本段是同一上下文的完整审查，不是独立复核。</li>
+<li>PDF、Office、压缩包和影音还在后面的路线里。</li>
+</ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul>
+<li><a href="../iterations/ITER-0002/CONCEPT.md"><code>.ai/iterations/ITER-0002/CONCEPT.md</code></a></li>
+<li><a href="../iterations/ITER-0002/AC_LIST.md"><code>.ai/iterations/ITER-0002/AC_LIST.md</code></a></li>
+<li><a href="../iterations/ITER-0002/TECH_PLAN.md"><code>.ai/iterations/ITER-0002/TECH_PLAN.md</code></a></li>
+<li><a href="../iterations/ITER-0002/VERIFY_REPORT.md"><code>.ai/iterations/ITER-0002/VERIFY_REPORT.md</code></a></li>
+<li><a href="../iterations/ITER-0002/CHANGELOG.md"><code>.ai/iterations/ITER-0002/CHANGELOG.md</code></a></li>
+<li><a href="../iterations/ITER-0002/evidence/"><code>.ai/iterations/ITER-0002/evidence/</code></a></li>
+<li>回退点 <code>b2fdebfcf7059d922074f3bda02d5d6c482f6c70</code>（写代码前的文档提交。应用源码不在这次提交里，把工作区重置到这个点会丢掉现在的实现。）</li>
+</ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

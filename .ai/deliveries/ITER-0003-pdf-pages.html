@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--
+  固定格式交付总结 · HTML 阅读视图模板 (SSOT)
+  ===========================================================================
+  本文件是 butler 交付总结的固定 HTML 模板，是「固定格式」的唯一来源。
+  语义规则见 Coder/20_Workflow_Lifecycle/delivery-summary.md §9。
+
+  填槽协议（迭代/里程碑收口 step ②，在写完同名 .md 之后执行）：
+  1. 读本模板，把每个 {{占位符}} 替换为对应 .md 章节的 HTML 渲染。
+  2. {{占位符}} 与 delivery-summary.md §4 的对应关系：
+       PDF 只排看得见的页  交付标题（同 .md 首行）
+       ITER-0003     ITER-NNNN 或 MILE-NNNN
+       迭代交付（小版本）  迭代交付（小版本） / 里程碑交付（大版本）
+       2026-09-29   收口日期 YYYY-MM-DD
+       <p>在自己的 Mac 上打开一份 PDF，能顺着翻页，并且只有看得到的页被画出来。这一段由模型自主确认验收和方案，没有逐项等人点头。收口前做了完整审查，结论是可以通过，没有必须先改才能交付的问题。审查是在同一段上下文里做的。项目没有打开独立复核，所以这不是另一份干净上下文的复查。</p>   §4.1 本次交付目标
+       <ul>
+<li>启用名单打开了 pdf。图片和文本仍开着。Office、压缩包和影音仍关着。</li>
+<li>PDF 查看器单独一块，打开时才加载。主包里没有它，也没有 pdf.js。</li>
+<li>只给当前视口里的页建画布。离开视口的页不再占着画面。视口高度还不知道时，一张都不画。</li>
+<li>换文件或离开画面时，上一份 PDF 会释放。同一时间不留两份。</li>
+<li>文件不在、内容不是 PDF，或打不开时，画面显示原因。不进最近列表，也不弹密码框。</li>
+<li>Rust 里仍然没有 PDF 解析库。字体不另拷进仓库。</li>
+</ul>       §4.2 已完成内容
+       <p>窗口里可以打开 PDF 并上下翻。长文件不会把每一页都画出来。打不开时会看到原因，最近打开里不会多出这一条。成功打开的 PDF 目前也不会出现在最近打开里。</p>     §4.3 关键变更 / 用户可感知变化
+       <p>改动在启用名单、打开结果、PDF 查看器和两条构建检查。图片和文本的看法没有改。没有做 Office、压缩包和影音，也没有重开上一段。</p>    §4.4 高层影响范围
+       <p>验收 AC1 到 AC5 都有机器记录，结论是通过。记录在 <code>.ai/iterations/ITER-0003/evidence/</code>，说明在 <code>.ai/iterations/ITER-0003/VERIFY_REPORT.md</code>。前端 35 项通过。构建、分包和依赖边界通过。审查时又重跑了前端测试、分包检查和依赖边界。构建本身没有再跑第二遍。</p>
+<p>浏览器里打开过一份五页样例，能看到字，滚到底后第一页的画布不在了。另开一份坏文件，画面是原因，最近列表仍空着。这不是浮现自己的系统窗口。系统窗口里没有再点开 PDF。</p>    §4.5 验证方式与结果摘要
+       <ul>
+<li>系统窗口里没有打开这份 PDF。浏览器里能翻，不能当成窗口里已经点过。这不卡后面的 Office。</li>
+<li>成功打开的 PDF 不进最近列表，侧栏不能点回去。要补的话另开一小步。</li>
+<li>某一页绘制失败时可能只剩空白，没有原因。整份打不开时仍会显示原因。</li>
+<li>还没滚到的页先按估算高度占位，滚动条长度会跳一下。</li>
+<li>本段是同一上下文的完整审查，不是独立复核。</li>
+<li>Office、压缩包和影音还在后面的路线里。</li>
+</ul>           §4.6 已知剩余风险 / 延后事项
+       <ul>
+<li><code>.ai/iterations/ITER-0003/CONCEPT.md</code></li>
+<li><code>.ai/iterations/ITER-0003/AC_LIST.md</code></li>
+<li><code>.ai/iterations/ITER-0003/TECH_PLAN.md</code></li>
+<li><code>.ai/iterations/ITER-0003/VERIFY_REPORT.md</code></li>
+<li><code>.ai/iterations/ITER-0003/CHANGELOG.md</code></li>
+<li><code>.ai/iterations/ITER-0003/evidence/</code></li>
+<li>回退点 <code>b2fdebfcf7059d922074f3bda02d5d6c482f6c70</code>（写代码前的文档提交。应用源码不在这次提交里，把工作区重置到这个点会丢掉现在的实现。）</li>
+</ul>      §4.7 引用 —— 只放路径指针（<a>/<code>），不得嵌四件套全文
+       迭代级不填         §4.8 拆分路线图回填 —— 仅里程碑级填写
+  3. 正文槽位填 block 级 HTML（<p> / <ul><li> / <table>）。
+  4. ROADMAP 块：里程碑级填 迭代级不填；迭代级把 ROADMAP:START~END 之间整段删除。
+  5. 硬约束：HTML 与 .md 同源、.md 为引用真源；<ul>
+<li><code>.ai/iterations/ITER-0003/CONCEPT.md</code></li>
+<li><code>.ai/iterations/ITER-0003/AC_LIST.md</code></li>
+<li><code>.ai/iterations/ITER-0003/TECH_PLAN.md</code></li>
+<li><code>.ai/iterations/ITER-0003/VERIFY_REPORT.md</code></li>
+<li><code>.ai/iterations/ITER-0003/CHANGELOG.md</code></li>
+<li><code>.ai/iterations/ITER-0003/evidence/</code></li>
+<li>回退点 <code>b2fdebfcf7059d922074f3bda02d5d6c482f6c70</code>（写代码前的文档提交。应用源码不在这次提交里，把工作区重置到这个点会丢掉现在的实现。）</li>
+</ul> 只引用路径、不嵌全文，
+     保证 HTML 体量恒定、不随迭代膨胀（同 delivery-summary.md §4.7）。
+  6. 单文件自包含：禁止引入外部 CSS / JS / 字体 / 图片链接，保持双击可离线打开。
+  ===========================================================================
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITER-0003 交付总结 · PDF 只排看得见的页</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>PDF 只排看得见的页</h1>
+      <div class="meta">
+        <span class="chip id">ITER-0003</span>
+        <span class="chip level">迭代交付（小版本）</span>
+        <span class="chip date">收口 2026-09-29</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>在自己的 Mac 上打开一份 PDF，能顺着翻页，并且只有看得到的页被画出来。这一段由模型自主确认验收和方案，没有逐项等人点头。收口前做了完整审查，结论是可以通过，没有必须先改才能交付的问题。审查是在同一段上下文里做的。项目没有打开独立复核，所以这不是另一份干净上下文的复查。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul>
+<li>启用名单打开了 pdf。图片和文本仍开着。Office、压缩包和影音仍关着。</li>
+<li>PDF 查看器单独一块，打开时才加载。主包里没有它，也没有 pdf.js。</li>
+<li>只给当前视口里的页建画布。离开视口的页不再占着画面。视口高度还不知道时，一张都不画。</li>
+<li>换文件或离开画面时，上一份 PDF 会释放。同一时间不留两份。</li>
+<li>文件不在、内容不是 PDF，或打不开时，画面显示原因。不进最近列表，也不弹密码框。</li>
+<li>Rust 里仍然没有 PDF 解析库。字体不另拷进仓库。</li>
+</ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>窗口里可以打开 PDF 并上下翻。长文件不会把每一页都画出来。打不开时会看到原因，最近打开里不会多出这一条。成功打开的 PDF 目前也不会出现在最近打开里。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>改动在启用名单、打开结果、PDF 查看器和两条构建检查。图片和文本的看法没有改。没有做 Office、压缩包和影音，也没有重开上一段。</p>
+    </section>
+
+    
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>验收 AC1 到 AC5 都有机器记录，结论是通过。记录在 <code>.ai/iterations/ITER-0003/evidence/</code>，说明在 <code>.ai/iterations/ITER-0003/VERIFY_REPORT.md</code>。前端 35 项通过。构建、分包和依赖边界通过。审查时又重跑了前端测试、分包检查和依赖边界。构建本身没有再跑第二遍。</p>
+<p>浏览器里打开过一份五页样例，能看到字，滚到底后第一页的画布不在了。另开一份坏文件，画面是原因，最近列表仍空着。这不是浮现自己的系统窗口。系统窗口里没有再点开 PDF。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul>
+<li>系统窗口里没有打开这份 PDF。浏览器里能翻，不能当成窗口里已经点过。这不卡后面的 Office。</li>
+<li>成功打开的 PDF 不进最近列表，侧栏不能点回去。要补的话另开一小步。</li>
+<li>某一页绘制失败时可能只剩空白，没有原因。整份打不开时仍会显示原因。</li>
+<li>还没滚到的页先按估算高度占位，滚动条长度会跳一下。</li>
+<li>本段是同一上下文的完整审查，不是独立复核。</li>
+<li>Office、压缩包和影音还在后面的路线里。</li>
+</ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul>
+<li><code>.ai/iterations/ITER-0003/CONCEPT.md</code></li>
+<li><code>.ai/iterations/ITER-0003/AC_LIST.md</code></li>
+<li><code>.ai/iterations/ITER-0003/TECH_PLAN.md</code></li>
+<li><code>.ai/iterations/ITER-0003/VERIFY_REPORT.md</code></li>
+<li><code>.ai/iterations/ITER-0003/CHANGELOG.md</code></li>
+<li><code>.ai/iterations/ITER-0003/evidence/</code></li>
+<li>回退点 <code>b2fdebfcf7059d922074f3bda02d5d6c482f6c70</code>（写代码前的文档提交。应用源码不在这次提交里，把工作区重置到这个点会丢掉现在的实现。）</li>
+</ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

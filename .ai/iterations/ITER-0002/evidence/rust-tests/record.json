@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_id": "rust-tests",
+  "iteration": "ITER-0002",
+  "ac_ids": [
+    "AC4",
+    "AC5"
+  ],
+  "command": {
+    "argv": [
+      "/usr/bin/env",
+      "CARGO_TARGET_DIR=/tmp/emerge-iter0002-target",
+      "cargo",
+      "test"
+    ],
+    "cwd": "src-tauri"
+  },
+  "started_at": "2026-09-29T09:19:41.954Z",
+  "finished_at": "2026-09-29T09:19:52.293Z",
+  "duration_ms": 10339,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 893,
+    "captured_bytes": 893,
+    "sha256": "7307daa069c6a658fda2c1653b97130a7b6bb54bba1bad36f02bee29ff1a9710",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 775,
+    "captured_bytes": 775,
+    "sha256": "f581ef01906d0865c84301fc4710931e8afed3f29fc8a82b6ebb7262828692ee",
+    "truncated": false
+  }
+}
