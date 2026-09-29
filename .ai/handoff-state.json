@@ -1,0 +1,46 @@
+{
+  "handoff_sha256": "35da7b4adc95486b9985fdf7a6f0f79f5f02de6364151a661625b93977b26412",
+  "schema_version": 1,
+  "snapshot": {
+    "decisions": [
+      "浮现第一段只做自己 Mac 上的轻窗口：拖进文件就能看图片和文本，记住最近打开的，格式按家族用到才加载。PDF、Office、压缩包和影音不在这一段。",
+      "已确认：产品名是浮现，英文 Emerge，工程目录是 emerge",
+      "已确认：只给自己在 Mac 上用，不对外分发"
+    ],
+    "iteration": "ITER-0001",
+    "milestone": "MILE-0001",
+    "next": "审阅 `.ai/CONCEPT.md`，确认后进入 P2。",
+    "phase": "P1 Analysis",
+    "pointers": [
+      ".ai/task-state.md",
+      ".ai/ITERATIONS.md",
+      ".ai/MILESTONES.md",
+      ".ai/MILESTONE.md",
+      ".ai/CONCEPT.md"
+    ],
+    "risks": [],
+    "status": "已从会话结晶需求，等待确认 Current Understanding 与 Scope。"
+  },
+  "sources": [
+    {
+      "path": ".ai/task-state.md",
+      "sha256": "7053be464001657c903222b989018b9f0142a2f5bcdc761efd1b90063d00fb15"
+    },
+    {
+      "path": ".ai/ITERATIONS.md",
+      "sha256": "762233e14be0f4cec3f8048e52f8bf76372f574f72241c9e7590325c6411dfe1"
+    },
+    {
+      "path": ".ai/MILESTONES.md",
+      "sha256": "3c0e25c28e9c3ad81c66ca85f9022fcffa397f6a7ff8048a0628f87adf4bc5e1"
+    },
+    {
+      "path": ".ai/MILESTONE.md",
+      "sha256": "b73c9181bfd22c8bf8aca46b930a4d00e9ab04bf7601e49364689181dac5a6b7"
+    },
+    {
+      "path": ".ai/CONCEPT.md",
+      "sha256": "1a8dd6e953c1e607e7118d1b528dc011e0feab76c2c6f9f5a679ceee41890cd8"
+    }
+  ]
+}

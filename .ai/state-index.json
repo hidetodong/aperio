@@ -1,0 +1,37 @@
+{
+  "hot_limit": 20,
+  "ledgers": {
+    "iterations": {
+      "cold_count": 0,
+      "hot_count": 1,
+      "hot_sha256": "762233e14be0f4cec3f8048e52f8bf76372f574f72241c9e7590325c6411dfe1",
+      "max_used": 1,
+      "routing": {
+        "directory": ".ai/history/iterations",
+        "minimum_width": 6,
+        "prefix": "ITER",
+        "receipt_suffix": ".json",
+        "scheme": "fixed-range-v1"
+      },
+      "row_count": 1,
+      "shard_count": 0
+    },
+    "milestones": {
+      "cold_count": 0,
+      "hot_count": 1,
+      "hot_sha256": "3c0e25c28e9c3ad81c66ca85f9022fcffa397f6a7ff8048a0628f87adf4bc5e1",
+      "max_used": 1,
+      "routing": {
+        "directory": ".ai/history/milestones",
+        "minimum_width": 6,
+        "prefix": "MILE",
+        "receipt_suffix": ".json",
+        "scheme": "fixed-range-v1"
+      },
+      "row_count": 1,
+      "shard_count": 0
+    }
+  },
+  "schema_version": 2,
+  "shard_size": 50
+}
