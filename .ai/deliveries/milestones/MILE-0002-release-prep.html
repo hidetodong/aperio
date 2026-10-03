@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MILE-0002 交付总结 · 开源仓库与 v0.0.1 发布准备</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>开源仓库与 v0.0.1 发布准备</h1>
+      <div class="meta">
+        <span class="chip id">MILE-0002</span>
+        <span class="chip level">里程碑交付（大版本）</span>
+        <span class="chip date">收口 2026-10-03</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>按开源项目把 v0.0.1 准备好：仓库根有说明，版本号和许可证对齐，公开仓库会自动检查，打版本标签会打出 Mac 包。这一版不把安装包发给别人。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul><li>仓库根有 README，说明能看什么、不做什么、怎么在 Mac 上构建。</li><li>版本号是 0.0.1。仓库根有 MIT 许可证。发版前的检查是 npm run check。</li><li>公开仓库是 https://github.com/hidetodong/aperio 。推送会跑检查。标签 v0.0.1 打出了 Mac 包，挂在构建产物里。没有 GitHub Release。</li></ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>源码可以在 GitHub 上看到。说明、许可证和版本号是 0.0.1 的事实。自动打出的安装包没有放到发布页，也没有公证。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>动的是说明、许可证、版本声明、发版检查和两个工作流。查看器的界面和格式没改。</p>
+    </section>
+
+    <!-- ROADMAP:START　里程碑级填写；迭代级把本注释块（含 section）整段删除 -->
+    <section class="block roadmap">
+      <h2>拆分路线图回填</h2>
+      <table>
+<tr><th>路线</th><th>落到</th><th>结果</th></tr>
+<tr><td>按开源项目写 README</td><td><code>.ai/deliveries/ITER-0007-oss-readme.md</code></td><td>已收口</td></tr>
+<tr><td>对齐版本号、许可证和发版检查</td><td><code>.ai/deliveries/ITER-0008-release-prep.md</code></td><td>已收口</td></tr>
+<tr><td>上传 GitHub，并配上检查和 Mac 打包</td><td><code>.ai/deliveries/ITER-0009-github-actions.md</code></td><td>已收口</td></tr>
+</table>
+    </section>
+    <!-- ROADMAP:END -->
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>三段记录分别在 <code>.ai/iterations/ITER-0007/evidence/readme-check/record.json</code>、<code>.ai/iterations/ITER-0008/evidence/release-check/record.json</code> 和 <code>.ai/iterations/ITER-0009/evidence/github-actions/record.json</code>。检查运行和 v0.0.1 打包运行都是 success。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul><li>自动打出的包是 Apple 芯片的，没有公证，也没有 GitHub Release。</li><li>版权人用的是 git 用户名 xingzidong。</li><li>三段都没有另一人复查。</li><li>北极星仍写着不对外分发。这一版公开的是源码和构建产物，不是已经发给别人的安装包。</li></ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul><li><code>.ai/milestones/MILE-0002/MILESTONE.md</code></li><li><code>.ai/deliveries/ITER-0007-oss-readme.md</code></li><li><code>.ai/deliveries/ITER-0008-release-prep.md</code></li><li><code>.ai/deliveries/ITER-0009-github-actions.md</code></li></ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_id": "github-actions",
+  "iteration": "ITER-0009",
+  "ac_ids": [
+    "AC1",
+    "AC2",
+    "AC3",
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "bash",
+      "/tmp/aperio-prove-iter0009.sh"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-03T08:47:43.966Z",
+  "finished_at": "2026-10-03T08:48:25.649Z",
+  "duration_ms": 41683,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 985,
+    "captured_bytes": 985,
+    "sha256": "6a79e5faca287dac6f0b77c9b35f3a806561174d65497a8665f82a3c7592f825",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

@@ -1,46 +1,32 @@
 {
-  "handoff_sha256": "426760dab3f5763cd71d51209890b9d5a6df8662a3151c7374ba4dd60d957ec1",
+  "handoff_sha256": "68c99b1bd1ecfe934f083f88a63ee394df887f038d1ec482afc6bbd92de02d95",
   "schema_version": 1,
   "snapshot": {
-    "decisions": [
-      "版本号、许可证和 npm run check 已经在仓库里。这一段把公开仓库建起来，推上去之后自动跑检查，打版本标签时打出 Mac 包，包只留在构建产物里。",
-      "已确认：公开仓库用 hidetodong/aperio。",
-      "已确认：推送时跑检查。打版本标签时打出 Mac 包，只作为 GitHub Actions 的构建产物，不自动创建 GitHub Release。"
-    ],
-    "iteration": "ITER-0009",
-    "milestone": "MILE-0002",
-    "next": "审阅 `.ai/CONCEPT.md`，确认后进入 P2。",
-    "phase": "P1 Analysis",
+    "decisions": [],
+    "iteration": "none",
+    "milestone": "none",
+    "next": "无。",
+    "phase": "无",
     "pointers": [
       ".ai/task-state.md",
       ".ai/ITERATIONS.md",
-      ".ai/MILESTONES.md",
-      ".ai/MILESTONE.md",
-      ".ai/CONCEPT.md"
+      ".ai/MILESTONES.md"
     ],
     "risks": [],
-    "status": "已从会话结晶需求，等待确认 Current Understanding 与 Scope。"
+    "status": "MILE-0002 已收口。公开仓库是 hidetodong/aperio。v0.0.1 的 Mac 包在 Actions 产物里，没有 GitHub Release。"
   },
   "sources": [
     {
       "path": ".ai/task-state.md",
-      "sha256": "29ea9d196b2db19b110b1d3e5680082d2cd0b3148098df7eaa7c57b69fd02695"
+      "sha256": "4cf3d40f35772b007ae64c3985b8c4506455863fdd40daf68265b2e844d516dd"
     },
     {
       "path": ".ai/ITERATIONS.md",
-      "sha256": "2b1a6417375fa9311fbef451ffd7da027f3b474c547bdd3761e200f00ef0882a"
+      "sha256": "7298d0a23cc510913cc771b7e925f058bccb4e9fedfc1581589839149cabf606"
     },
     {
       "path": ".ai/MILESTONES.md",
-      "sha256": "b71d969bfa10c98b7978258276c4ab9ead4dadcbfa23d9936288cde8bbb355ab"
-    },
-    {
-      "path": ".ai/MILESTONE.md",
-      "sha256": "be6b43e7ad2df43fa17ee2511425ff41cb0efe47263df8664176aaccc83df16f"
-    },
-    {
-      "path": ".ai/CONCEPT.md",
-      "sha256": "e5d4b4dc73d7540ac0f95fcec7ef0cf6fbe078557ba0a341ac87cd2b83ce2e8a"
+      "sha256": "9a46bb4dc4ccb2a82f21d0caf0ae4ff5fedf5845e67ef54284fa58ec34910fac"
     }
   ]
 }

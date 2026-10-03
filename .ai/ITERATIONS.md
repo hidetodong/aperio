@@ -2,10 +2,10 @@
 
 > 北极星：在自己的 Mac 上用 Aperio 看常见文件。显示名是 Aperio，目录和标识仍是 emerge。窗口、图片、文本、PDF、Office、压缩包和影音都已收口。打开失败的原因、缺文件和只认最后一次，用测试钉住了，还没有在真窗口里再点一遍。这些格式都在浏览器里看过样例，系统窗口里还没点开。成功打开的 PDF 仍不进最近列表。冷启动一秒和空闲内存没有量过，这两项是规划，不是各段的通过线。不对外分发，不做编辑和插件市场。
 
-current: ITER-0009
+current: none
 | 迭代号 | 标题 | 状态 | 开启 | 收口 | 所属 milestone | 交付 |
 |---|---|---|---|---|---|---|
-| ITER-0009 | 上传 GitHub 并配上自动检查和 Mac 打包 | active | 2026-10-03 | — | MILE-0002 | — |
+| ITER-0009 | 上传 GitHub 并配上自动检查和 Mac 打包 | closed | 2026-10-03 | 2026-10-03 | MILE-0002 | .ai/deliveries/ITER-0009-github-actions.md |
 | ITER-0008 | 对齐 v0.0.1 并补上发版检查 | closed | 2026-10-03 | 2026-10-03 | MILE-0002 | .ai/deliveries/ITER-0008-release-prep.md |
 | ITER-0007 | 按开源项目写 README | closed | 2026-10-03 | 2026-10-03 | MILE-0002 | .ai/deliveries/ITER-0007-oss-readme.md |
 | ITER-0006 | 按 v1.1 规范改现有界面 | closed | 2026-09-30 | 2026-09-30 | — | .ai/deliveries/ITER-0006-v11-ui.md |
