@@ -139,7 +139,7 @@ butler 持久模式与 Active Profiles 统一持久在 `.ai/butler.config.json`�
 
 ## 项目特定约束
 
-- 产品名是「浮现」，英文 Emerge，目录名 emerge。不要用 Emergence，也不要用 Surface。
+- 产品名是 Aperio。目录名仍是 emerge。不要用浮现、Emerge、Emergence，也不要用 Surface。
 - 仓库还是空的。技术画像先不启用。等有 TypeScript 源码，再考虑打开 typescript-rules。
 - 目标是 Mac 上自己用的本地阅读器。壳是 Tauri 2（Rust 包一层系统网页视图）。界面是 TypeScript、React、Vite。Rust 只打开文件、读字节、解码 HEIC。格式解析放在前端，按家族按需加载。
 - 这里说的插件，是一份启用名单加上懒加载模块，不是插件市场。

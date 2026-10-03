@@ -3,7 +3,14 @@ import { join, normalize, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const packageRoot = fileURLToPath(new URL("../node_modules/pdfjs-dist/", import.meta.url));
+const preludeFile = fileURLToPath(new URL("../src/formats/pdf/pdfPrelude.js", import.meta.url));
+const workerFile = join(packageRoot, "build/pdf.worker.min.mjs");
+const workerUrl = "/pdfjs/pdf.worker.mjs";
 const dirs = ["cmaps", "standard_fonts", "wasm", "iccs"];
+
+function workerSource() {
+  return `${readFileSync(preludeFile, "utf8")}\n${readFileSync(workerFile, "utf8")}`;
+}
 
 function contentType(name) {
   if (name.endsWith(".wasm")) return "application/wasm";
@@ -29,6 +36,12 @@ export function pdfjsAssets() {
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const url = req.url?.split("?")[0] ?? "";
+        if (url === workerUrl) {
+          res.setHeader("Content-Type", "text/javascript");
+          res.setHeader("Cache-Control", "no-cache");
+          res.end(workerSource());
+          return;
+        }
         const dir = dirs.find((name) => url.startsWith(`/pdfjs/${name}/`));
         if (!dir) return next();
         let rel = "";
@@ -51,6 +64,11 @@ export function pdfjsAssets() {
       });
     },
     generateBundle() {
+      this.emitFile({
+        type: "asset",
+        fileName: "pdfjs/pdf.worker.mjs",
+        source: workerSource(),
+      });
       for (const dir of dirs) {
         const base = join(packageRoot, dir);
         for (const file of filesIn(base)) {

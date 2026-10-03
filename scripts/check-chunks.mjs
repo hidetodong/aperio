@@ -27,6 +27,8 @@ const markers = [
   ["text", /data-viewer["`]?\s*[:=]\s*["'`]text["'`]/],
   ["pdf", /data-viewer["`]?\s*[:=]\s*["'`]pdf["'`]/],
   ["office", /data-viewer["`]?\s*[:=]\s*["'`]office["'`]/],
+  ["zip", /data-viewer["`]?\s*[:=]\s*["'`]zip["'`]/],
+  ["media", /data-viewer["`]?\s*[:=]\s*["'`]media["'`]/],
 ];
 for (const [name, marker] of markers) {
   if (marker.test(entryText)) {

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>浮现 · 两张静帧</title>
+<style>
+  :root {
+    --desk: #f6f6f6;
+    --ink: #1c1c1c;
+    --quiet: #4a4a4d;
+    --row: #1d1d1f;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background: var(--desk);
+    color: var(--row);
+    font-family: "PingFang SC", "SF Pro Text", -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main {
+    width: 960px;
+    margin: 0 auto;
+    padding: 44px 0 72px;
+  }
+
+  section + section { margin-top: 56px; }
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .note {
+    margin: 0 0 14px;
+    max-width: 640px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--quiet);
+  }
+
+  .win {
+    position: relative;
+    width: 960px;
+    height: 640px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #dedede;
+    border-radius: 12px;
+  }
+
+  .lights {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 52px;
+  }
+
+  .lights i {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
+  }
+
+  .lights i:nth-child(1) { background: #ff5f57; }
+  .lights i:nth-child(2) { background: #febc2e; }
+  .lights i:nth-child(3) { background: #28c840; }
+
+  .filename {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(22, 22, 24, 0.78);
+  }
+
+  .page {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 72px 40px 0;
+    background: #fff;
+    color: var(--ink);
+    font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  .page h2 {
+    margin: 0 0 26px;
+    font-family: inherit;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+  }
+
+  .page p { margin: 0 0 1.15em; }
+
+  .page.with-side { padding-left: 220px; }
+
+  .side {
+    position: absolute;
+    z-index: 2;
+    top: 52px;
+    bottom: 0;
+    left: 0;
+    width: 196px;
+    padding: 8px 12px 0;
+    background: #fff;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .side span {
+    display: block;
+    height: 28px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 28px;
+    color: #1d1d1f;
+    white-space: nowrap;
+  }
+
+  .side .here { font-weight: 600; }
+
+  .fold {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: rgba(0, 0, 0, 0.55);
+    transform: translateX(-50%);
+  }
+
+  .fold svg { display: block; width: 20px; height: 20px; }
+
+  .empty {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 232px;
+  }
+
+  .menu button,
+  .files span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: #1d1d1f;
+    font: inherit;
+  }
+
+  .menu button {
+    height: 40px;
+    padding: 0 14px;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .files {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4px;
+  }
+
+  .files span {
+    height: 32px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .menu svg,
+  .files svg {
+    display: block;
+    flex: none;
+    width: 18px;
+    height: 18px;
+  }
+
+  .cursor {
+    position: absolute;
+    z-index: 6;
+    width: 15px;
+    height: 15px;
+  }
+
+  .cursor.at-text { left: 620px; top: 318px; }
+  .cursor.at-side { left: 148px; top: 280px; }
+
+  .foot {
+    margin: 36px 0 0;
+    max-width: 640px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--quiet);
+  }
+</style>
+</head>
+<body>
+<main>
+  <section>
+    <h1>还没打开文件</h1>
+    <p class="note">内容在窗口正中。打开文件、打开文件夹、最近打开是三个按钮，下面五份最近文件。每一项都有图标。这时没有目录，整窗仍可拖入文件。</p>
+    <div class="win">
+      <div class="empty">
+        <div class="menu">
+          <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></g></svg>打开文件</button>
+          <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 14l1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></svg>打开文件夹</button>
+          <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9a9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5m4-1v5l4 2"/></g></svg>最近打开</button>
+          <div class="files">
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4M5 18h1.5a1.5 1.5 0 0 0 0-3H5v6m12-3h2m1-3h-3v6m-6-6v6h1a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/></g></svg>慢变量.pdf</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M14 3v4a1 1 0 0 0 1 1h4m-2.5 7h3"/><path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4M4.5 15h3M6 15v6m12-6v6m-8-6l4 6m-4 0l4-6"/></g></svg>页边摘录.txt</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 15V9l2 2l2-2v6m3-2l2 2l2-2m-2 2V9"/></g></svg>第四十二页.md</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4m-8 6h1.5a1.5 1.5 0 0 0 0-3H11v6m9-6h-1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1v-3M5 15h3v4.5a1.5 1.5 0 0 1-3 0"/></g></svg>街灯.jpg</span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4M2 15v6h1a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2zm15 1.5a1.5 1.5 0 0 0-3 0v3a1.5 1.5 0 0 0 3 0M9.5 15a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-3 0v-3A1.5 1.5 0 0 1 9.5 15m10 0l3 6m-3 0l3-6"/></g></svg>夜间备忘.docx</span>
+          </div>
+        </div>
+      </div>
+      <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section>
+    <h1>正在看</h1>
+    <p class="note">鼠标在正文里。目录收着，折叠按钮也不出现。窗口里只有这份文件。</p>
+    <div class="win">
+      <article class="page">
+        <h2>慢变量</h2>
+        <p>读到第四十二页停下来。这一节不谈结构，谈一条街。铺装换过，树坑挪了半步，夜间的灯从暖改成白。地图上看不出差别，走路的人却绕开了原来会站住的地方。</p>
+        <p>作者把灯写得很具体。灯不是气氛。灯决定你愿不愿意在那儿多留两分钟。</p>
+        <p>页边只记了一句：改动要小到第二天还认得，这是同一条街。</p>
+        <p>再往下他把白天和夜里并排放。先写铺装的接缝，再写人怎么从灯下走到暗处。接缝比颜色诚实。颜色可以重新粉刷，接缝留在脚底下。</p>
+        <p>他接着写树。树坑挪了半步之后，原来靠着树站住的人没有了靠的地方，影也短了一截。九点，灯全亮。十点半，树那边先暗。十一点，接缝还看得见，人已经不在了。</p>
+        <p>第二天又走了一遍。铺装的接缝还在，灯也还是白的。原来会站一会儿的地方，现在人只是经过。他没有写人后来去了哪里，只把灯灭的时间留在页边上。</p>
+        <p>街角的店把招牌灯也换成了白。他写，招牌不重要，重要的是人还愿不愿意在门口停一下。第二天他数了，停下来的只有一个人，而且是在等车。</p>
+        <p>再往下是三个晚上的灯灭时间。九点，十点半，十一点。表很小，就贴在这一段的下面。</p>
+      </article>
+      <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="filename">慢变量.pdf</div>
+      <svg class="cursor at-text" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1.2 2 13.2 5.4 9.6 8.6 14.4 10.4 13.4 7.2 8.6 12.2 8.2Z" fill="#1c1c1c"/></svg>
+    </div>
+  </section>
+
+  <section>
+    <h1>鼠标在左边</h1>
+    <p class="note">目录在左边，正文整段让开。底部那个图标是收起，只有鼠标在这块里才出现。鼠标离开后，目录和图标一起消失，正文回到贴边。</p>
+    <div class="win">
+      <article class="page with-side">
+        <h2>慢变量</h2>
+        <p>读到第四十二页停下来。这一节不谈结构，谈一条街。铺装换过，树坑挪了半步，夜间的灯从暖改成白。地图上看不出差别，走路的人却绕开了原来会站住的地方。</p>
+        <p>作者把灯写得很具体。灯不是气氛。灯决定你愿不愿意在那儿多留两分钟。</p>
+        <p>页边只记了一句：改动要小到第二天还认得，这是同一条街。</p>
+        <p>再往下他把白天和夜里并排放。先写铺装的接缝，再写人怎么从灯下走到暗处。接缝比颜色诚实。颜色可以重新粉刷，接缝留在脚底下。</p>
+        <p>他接着写树。树坑挪了半步之后，原来靠着树站住的人没有了靠的地方，影也短了一截。九点，灯全亮。十点半，树那边先暗。十一点，接缝还看得见，人已经不在了。</p>
+        <p>第二天又走了一遍。铺装的接缝还在，灯也还是白的。原来会站一会儿的地方，现在人只是经过。他没有写人后来去了哪里，只把灯灭的时间留在页边上。</p>
+        <p>街角的店把招牌灯也换成了白。他写，招牌不重要，重要的是人还愿不愿意在门口停一下。第二天他数了，停下来的只有一个人，而且是在等车。</p>
+        <p>再往下是三个晚上的灯灭时间。九点，十点半，十一点。表很小，就贴在这一段的下面。</p>
+      </article>
+      <aside class="side">
+        <button class="fold" type="button" aria-label="收起"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18m7-6l-3-3l3-3"/></g></svg></button>
+        <span>第四十二页.md</span>
+        <span class="here">慢变量.pdf</span>
+        <span>插图</span>
+        <span>页边摘录.txt</span>
+      </aside>
+      <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="filename">慢变量.pdf</div>
+      <svg class="cursor at-side" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1.2 2 13.2 5.4 9.6 8.6 14.4 10.4 13.4 7.2 8.6 12.2 8.2Z" fill="#1c1c1c"/></svg>
+    </div>
+  </section>
+
+  <p class="foot">三张都是现在的默认窗口大小，宽 960，高 640。收起用的是 Iconify 上 Lucide 的 panel-left-close。图里的箭头是鼠标。红黄绿是画上去的占位，真窗口继续用系统按钮。程序还没改。</p>
+</main>
+</body>
+</html>

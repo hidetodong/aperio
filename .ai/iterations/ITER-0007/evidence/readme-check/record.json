@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_id": "readme-check",
+  "iteration": "ITER-0007",
+  "ac_ids": [
+    "AC1",
+    "AC2",
+    "AC3",
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "python3",
+      "/tmp/aperio-readme-check.py"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-03T03:59:14.367Z",
+  "finished_at": "2026-10-03T03:59:14.404Z",
+  "duration_ms": 36,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 5,
+    "captured_bytes": 5,
+    "sha256": "c26de83abdc9496cd1301470918ec39ecca1cf389ef0ae1c6504da1800d1c431",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

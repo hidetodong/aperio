@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITER-0006 交付总结 · 按 v1.1 规范改现有界面</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>按 v1.1 规范改现有界面</h1>
+      <div class="meta">
+        <span class="chip id">ITER-0006</span>
+        <span class="chip level">迭代交付（小版本）</span>
+        <span class="chip date">收口 2026-09-30</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>现有界面改用 v1.1 的强调色，选中改成墨色浅底，不再画成蓝色。打开文件的行为不变。这一段由模型自主确认验收和方案，没有逐项等人点头。收口前做了完整审查，结论是可以通过，没有必须先改才能交付的问题。审查是在同一段上下文里做的。项目没有打开独立复核，所以这不是另一份干净上下文的复查。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul>
+<li>浅色变量接进样式，强调色改为 #2f6fd1。</li>
+<li>侧栏、列表和文件卡片的选中改成墨色浅底，文字保持正文色。深色用白墨，避免黑底上看不见。</li>
+<li>主按钮、开着的开关、链接、焦点环和阅读进度条使用新强调色。视频进度条仍是白色。</li>
+<li>没有新做还没用到的控件，也没有加图标库。打开路径、最近列表、包名和包标识没改。</li>
+</ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>选中的一行不再是蓝色，底是很浅的灰。强调色比原来略浅。深色窗口里选中仍能看见，那一层是浅色，不是蓝。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>改动在样式变量、选中规则、三处类型色，以及首页拖入文件时的底色。打开路径、格式范围和查看器的加载方式没有改。成功打开的 PDF 仍然不进最近列表。</p>
+    </section>
+
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>验收 AC1、AC3、AC4 有通过的机器记录。AC2 的机器记录核对的是样式原文，浏览器里的计算色没有封成记录，所以是弱验证。说明在 <code>.ai/iterations/ITER-0006/VERIFY_REPORT.md</code>，记录在 <code>.ai/iterations/ITER-0006/evidence/</code>。前端 65 项通过。构建和分包通过，主包约 271.69 kB，查看器不在主包里。审查时又重跑了扫描、测试、分包和选中规则。第一次扫描失败是检查脚本的语法错误，不是界面里还有旧蓝。</p><p>浏览器里看过焦点环、主按钮、开关和深色侧栏。列表、卡片和弹窗结果行用的是探进去的元素。这不是 Aperio 自己的系统窗口。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul>
+<li>系统窗口里没有点开。浏览器里能看，不能当成窗口里已经点过。后面没有依赖这件事的路线。</li>
+<li>本段没有单独的 git 回退点。工作树在动手前就不干净，按约定没有提交。</li>
+<li>深色白墨的比例是模型定的。规范只有浅色稿。</li>
+<li>胶片条上的 10px 字和设置色块里的 11px 字这一轮没改。</li>
+<li>本段是同一上下文的完整审查，不是独立复核。</li>
+</ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul>
+<li><code>.ai/iterations/ITER-0006/CONCEPT.md</code></li>
+<li><code>.ai/iterations/ITER-0006/AC_LIST.md</code></li>
+<li><code>.ai/iterations/ITER-0006/TECH_PLAN.md</code></li>
+<li><code>.ai/iterations/ITER-0006/VERIFY_REPORT.md</code></li>
+<li><code>.ai/iterations/ITER-0006/CHANGELOG.md</code></li>
+<li><code>.ai/iterations/ITER-0006/evidence/</code></li>
+</ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

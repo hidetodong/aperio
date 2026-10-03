@@ -1,21 +1,17 @@
 <!-- butler-artifact-template: 1.0.0 artifact=verify_report -->
-# VERIFY_REPORT — ITER-0005
+# VERIFY_REPORT — ITER-0009
 
 ## Verification Summary
 
-- 还没开始验证。验收和方案刚锁定。
+- {{CONTENT}}
 
 ## AC Status
 
-- [ ] AC1 (auto·可靠): 未跑
-- [ ] AC2 (auto·可靠): 未跑
-- [ ] AC3 (auto·可靠): 未跑
-- [ ] AC4 (auto·可靠): 未跑
-- [ ] AC5 (auto·可靠): 未跑
+- [ ] AC1 (auto·可靠): {{CONTENT}}
 
 ## 人测道小结
 
-- 真窗口观感不在自动验收里。无人值守，不起人测回传。
+- N/A（本轮无 human·待人 档 AC，人测道不适用）。
 
 ## Evidence Index
 
@@ -25,7 +21,7 @@
 
 ## Verification Results
 
-- 还没有证据记录。
+- {{CONTENT}}
 
 ## TDD Pair Status
 
@@ -42,7 +38,7 @@
 
 ## Gate Coverage
 
-- 实现还没开始，门禁还没覆盖。
+- {{CONTENT}}
 
 ## References Compliance
 
@@ -50,9 +46,8 @@
 
 ## Remaining Risks
 
-- 真窗口未点。
-- 成功打开的 PDF 仍不进最近列表。这一段不改。
+- N/A
 
 ## Handoff / Next Step
 
-- 按方案实现。不把压缩包和影音写回已收口的 Office，也不改 PDF 的最近列表。
+- {{CONTENT}}

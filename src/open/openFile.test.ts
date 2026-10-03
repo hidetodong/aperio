@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { MSG } from "../messages";
-import { assertPlainText, explainFailure, openLocalPath, type FileIo } from "./openFile";
-import { failOpen, recentsAfterOfficeShown, recentsAfterOpen, reduceOpen, type Session } from "./session";
+import { assertPlainText, browserPlan, explainFailure, openLocalPath, type FileIo } from "./openFile";
+import { failOpen, recentsAfterOfficeShown, recentsAfterOpen, recentsAfterShown, reduceOpen, type Session } from "./session";
 
 function io(partial: Partial<FileIo> = {}): FileIo {
   return {
@@ -42,10 +42,10 @@ describe("打开文件", () => {
     expect(kept).toEqual(["/tmp/a.heic.png"]);
   });
 
-  it("关掉的格式不读文件，也不确认文件", async () => {
+  it("tar 和 gz 说明先不看，不去读也不确认", async () => {
     let reads = 0;
     let checks = 0;
-    const opened = await openLocalPath("/tmp/a.zip", io({
+    const probe = io({
       readText: async () => {
         reads += 1;
         return "no";
@@ -53,10 +53,16 @@ describe("打开文件", () => {
       confirmFile: async () => {
         checks += 1;
       },
-    }));
-    expect(opened.current).toMatchObject({ kind: "error", message: MSG.disabled });
+    });
+    for (const path of ["/tmp/a.tar", "/tmp/a.gz", "/tmp/a.tgz", "/tmp/notes.tar.gz"]) {
+      const opened = await openLocalPath(path, probe);
+      expect(opened.current).toMatchObject({ kind: "error", message: MSG.archiveSkipped });
+    }
     expect(reads).toBe(0);
     expect(checks).toBe(0);
+    expect(browserPlan("a.tar", 10)).toEqual({ kind: "error", message: MSG.archiveSkipped });
+    expect(browserPlan("big.zip", 20 * 1024 * 1024 + 1)).toEqual({ kind: "error", message: MSG.zipTooBig });
+    expect(browserPlan("movie.mp4", 80 * 1024 * 1024).kind).toBe("media");
   });
 
   it("字符串拒绝时显示原文，并清掉上一份", async () => {
@@ -243,5 +249,78 @@ describe("打开文件", () => {
       recents: opened.recents,
     };
     expect(failOpen(next, "asset:///tmp/a.docx", "这不是 Word 文档")).toBe(next);
+  });
+
+  it("压缩包和影音只交地址，名单或能播之后才进最近列表", async () => {
+    let reads = 0;
+    const previous: Session = {
+      current: { kind: "text", path: "/old.txt", name: "old.txt", mode: "plain", text: "旧内容" },
+      recents: [{ path: "/old.txt", name: "old.txt", openedAt: 1 }],
+    };
+    const probe = io({
+      readText: async () => {
+        reads += 1;
+        return "no";
+      },
+    });
+    const zip = await openLocalPath("/tmp/a.zip", probe);
+    const pending = recentsAfterOpen(previous, zip.current, 2);
+    const reduced = reduceOpen(previous, { current: zip.current, recents: pending });
+    expect(zip.current).toMatchObject({ kind: "zip", url: "asset:///tmp/a.zip" });
+    expect(reads).toBe(0);
+    expect(JSON.stringify(reduced.session.current)).not.toContain("旧内容");
+    expect(reduced.session.recents).toEqual(previous.recents);
+    const shown = recentsAfterShown(reduced.session, "zip", "/tmp/a.zip", "a.zip", 3);
+    expect(shown.map((item) => item.path)).toEqual(["/tmp/a.zip", "/old.txt"]);
+    const late = recentsAfterShown(
+      { current: { kind: "text", path: "/b.txt", name: "b.txt", mode: "plain", text: "下一份" }, recents: previous.recents },
+      "zip",
+      "/tmp/a.zip",
+      "a.zip",
+      4,
+    );
+    expect(late).toEqual(previous.recents);
+
+    const media = await openLocalPath("/tmp/a.mp3", probe);
+    const mediaPending = recentsAfterOpen(previous, media.current, 5);
+    expect(media.current).toMatchObject({ kind: "media", url: "asset:///tmp/a.mp3" });
+    expect(mediaPending).toEqual(previous.recents);
+    const played = recentsAfterShown(
+      { current: media.current, recents: previous.recents },
+      "media",
+      "/tmp/a.mp3",
+      "a.mp3",
+      6,
+    );
+    expect(played.map((item) => item.path)).toEqual(["/tmp/a.mp3", "/old.txt"]);
+    expect(reads).toBe(0);
+  });
+
+  it("压缩包不在时显示原因，最近列表不动，上一份不留", async () => {
+    const previous: Session = {
+      current: { kind: "text", path: "/old.txt", name: "old.txt", mode: "plain", text: "旧内容" },
+      recents: [{ path: "/old.txt", name: "old.txt", openedAt: 1 }],
+    };
+    const failed = await openLocalPath("/gone.zip", io({
+      confirmFile: async () => {
+        throw MSG.notFound;
+      },
+    }));
+    const recents = recentsAfterOpen(previous, failed.current, 2);
+    const reduced = reduceOpen(previous, { current: failed.current, recents });
+    expect(reduced.session.current).toMatchObject({ kind: "error", message: MSG.notFound });
+    expect(JSON.stringify(reduced.session)).not.toContain("旧内容");
+    expect(reduced.session.recents).toEqual(previous.recents);
+    const opened: Session = {
+      current: { kind: "zip", path: "/tmp/a.zip", name: "a.zip", url: "asset:///tmp/a.zip" },
+      recents: previous.recents,
+    };
+    expect(failOpen(opened, "asset:///tmp/a.zip", MSG.notZip).current).toMatchObject({
+      kind: "error",
+      message: MSG.notZip,
+    });
+    expect(failOpen({ current: { kind: "image", path: "/b.png", name: "b.png", url: "asset:///b.png" }, recents: previous.recents }, "asset:///tmp/a.zip", MSG.notZip).current).toMatchObject({
+      kind: "image",
+    });
   });
 });

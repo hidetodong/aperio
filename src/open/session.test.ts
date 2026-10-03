@@ -13,6 +13,11 @@ describe("换文件", () => {
     const office = { kind: "office" as const, path: "/a.docx", name: "a.docx", url: "blob:office" };
     expect(urlsToRevoke(office, next)).toEqual(["blob:office"]);
     expect(urlsToRevoke(office, { ...office })).toEqual([]);
+    const zip = { kind: "zip" as const, path: "/a.zip", name: "a.zip", url: "blob:zip" };
+    expect(urlsToRevoke(zip, next)).toEqual(["blob:zip"]);
+    const media = { kind: "media" as const, path: "/a.mp4", name: "a.mp4", url: "blob:media" };
+    expect(urlsToRevoke(media, next)).toEqual(["blob:media"]);
+    expect(urlsToRevoke(media, { ...media })).toEqual([]);
   });
 
   it("成功时叠到当前列表上，失败时不动列表", () => {

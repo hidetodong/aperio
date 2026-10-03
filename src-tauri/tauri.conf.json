@@ -1,8 +1,9 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "浮现",
-  "version": "0.1.0",
-  "identifier": "local.emerge.app",
+  "productName": "Aperio",
+  "mainBinaryName": "Aperio",
+  "version": "0.0.1",
+  "identifier": "local.aperio.app",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -12,14 +13,19 @@
   "app": {
     "windows": [
       {
-        "title": "浮现",
-        "width": 960,
-        "height": 640,
+        "title": "Aperio",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 960,
+        "minHeight": 640,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": { "x": 18, "y": 18 },
         "dragDropEnabled": true
       }
     ],
     "security": {
-      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' asset: http://asset.localhost blob: data:; img-src 'self' asset: http://asset.localhost blob: data:; font-src 'self' blob: data:; style-src 'self' 'unsafe-inline'",
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' asset: http://asset.localhost blob: data:; img-src 'self' asset: http://asset.localhost blob: data:; media-src 'self' asset: http://asset.localhost blob: data:; font-src 'self' blob: data:; style-src 'self' 'unsafe-inline'",
       "assetProtocol": {
         "enable": true,
         "scope": {
@@ -32,6 +38,9 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "macOS": {
+      "bundleName": "Aperio"
+    },
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

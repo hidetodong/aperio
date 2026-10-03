@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MILE-0001 交付总结 · 浮现个人阅读器第一版</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>浮现个人阅读器第一版</h1>
+      <div class="meta">
+        <span class="chip id">MILE-0001</span>
+        <span class="chip level">里程碑交付（大版本）</span>
+        <span class="chip date">收口 2026-09-30</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>在自己的 Mac 上，用一个轻窗口看常见文件。窗口能拖文件、能记最近打开。PDF 翻页，Word、Excel、PPT 和 CSV 只看内容，文本和图片能看，ZIP 能列名单并预览里面的文本、图片和 PDF，MP4、MOV、MP3 交给系统播放。不做编辑，不对外分发，不做插件市场。这五段都由模型在危险模式里自主推进，没有逐项等人点头。每一段收口前的审查都是同一上下文做的，不是另一份干净上下文的独立复核。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul><li>窗口、最近打开、图片和文本，以及格式按需加载的启用名单。</li><li>打开失败会说出原因。缺了的文件不会装成成功。连续打开只认最后一次。</li><li>PDF 只画看得到的页。</li><li>Word、Excel、PPT 和 CSV 只预览内容。旧的 doc、xls、ppt 说明先不看。</li><li>ZIP 先列名单，再预览里面的文本、图片和 PDF。MP4、MOV、MP3 用播放条播放。tar 和 gz 说明先不看。</li></ul>
+<p>各段细节见下面的迭代交付，这里不重复。</p>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>一个叫「浮现」的窗口。文件拖进去，内容才出来。打不开时会看到原因。图片、文本、Office、压缩包和能播的影音会进入最近打开。成功打开的 PDF 不会进入最近打开。关掉的格式就等于不支持。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>程序在 <code>/Users/cyborgno2/Documents/research/emerge</code>。壳是 Tauri 2，界面是 TypeScript、React 和 Vite。Rust 只打开文件、读字节、用系统能力解 HEIC。格式解析在前端，用到才加载。没有做公证、收款、自动更新、Windows、网站，也没有插件市场。</p>
+    </section>
+
+    <!-- ROADMAP:START　里程碑级填写；迭代级把本注释块（含 section）整段删除 -->
+    <section class="block roadmap">
+      <h2>拆分路线图回填</h2>
+      <table><thead><tr><th>路线</th><th>落到</th><th>结果</th></tr></thead><tbody><tr><td>窗口、最近打开、图片和文本</td><td><code>.ai/deliveries/ITER-0001-window-image-text.md</code></td><td>已收口</td></tr><tr><td>打开失败说清原因，只认最后一次</td><td><code>.ai/deliveries/ITER-0002-last-open.md</code></td><td>已收口</td></tr><tr><td>PDF 只排看得见的页</td><td><code>.ai/deliveries/ITER-0003-pdf-pages.md</code></td><td>已收口</td></tr><tr><td>Word、Excel、CSV、PPT 只预览</td><td><code>.ai/deliveries/ITER-0004-office-preview.md</code></td><td>已收口</td></tr><tr><td>ZIP 名单、包内预览，以及 MP4、MOV、MP3</td><td><code>.ai/deliveries/ITER-0005-zip-and-media.md</code></td><td>已收口</td></tr></tbody></table>
+    </section>
+    <!-- ROADMAP:END -->
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>五段各自的验收都有机器记录，结论是通过。记录分别在 <code>.ai/iterations/ITER-0001/evidence/</code> 到 <code>.ai/iterations/ITER-0005/evidence/</code>。浏览器里看过图片、文本、PDF、Office、压缩包和一段 mp3。系统窗口里没有把这些文件再点一遍。冷启动到能接拖放是否在一秒内、空闲时是否不超过 80MB，都没有量过。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul><li>系统窗口没有点过。浏览器里能看，不能当成自己的窗口里已经点过。影音那条内容安全策略也还没在重启后的系统窗口里验证。</li><li>成功打开的 PDF 仍不进最近列表。当时单独记下了，没有塞进后面的段。</li><li>冷启动一秒、空闲内存 80MB，是规划时的要求，不是各段的通过线，也没有量过。不写成已经达到。</li><li>压缩包超过 20MB 时，从本机路径打开会先把字节取下来再拒绝。条目大小读的是库的内部字段。名单上限只限制显示。</li><li>Excel 用的库是 npm 上的 0.18.5，这个版本有公开的原型污染问题。没有换库。</li><li>五段审查都是同一上下文做的，不是独立复核。</li></ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul><li><code>.ai/milestones/MILE-0001/MILESTONE.md</code></li><li><code>.ai/deliveries/ITER-0001-window-image-text.md</code></li><li><code>.ai/deliveries/ITER-0002-last-open.md</code></li><li><code>.ai/deliveries/ITER-0003-pdf-pages.md</code></li><li><code>.ai/deliveries/ITER-0004-office-preview.md</code></li><li><code>.ai/deliveries/ITER-0005-zip-and-media.md</code></li></ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

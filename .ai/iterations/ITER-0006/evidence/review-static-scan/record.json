@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "evidence_id": "review-static-scan",
+  "iteration": "ITER-0006",
+  "ac_ids": [
+    "AC1",
+    "AC3",
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "python3",
+      "/tmp/aperio-v11-static-scan.py"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-30T09:52:45.244Z",
+  "finished_at": "2026-09-30T09:52:45.321Z",
+  "duration_ms": 77,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 85,
+    "captured_bytes": 85,
+    "sha256": "506d7df3ba8fa5c2cb5eb8687dd299dec0e52d67083f714cd0475c49a632d851",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

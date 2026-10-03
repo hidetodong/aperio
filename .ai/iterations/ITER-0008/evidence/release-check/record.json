@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "evidence_id": "release-check",
+  "iteration": "ITER-0008",
+  "ac_ids": [
+    "AC1",
+    "AC2",
+    "AC3",
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "npm",
+      "run",
+      "check"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-03T04:04:12.837Z",
+  "finished_at": "2026-10-03T04:04:18.490Z",
+  "duration_ms": 5653,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 17535,
+    "captured_bytes": 17535,
+    "sha256": "dfa0efa13292dafff463de566ea54331ff5feaea3bd4efdb7917e74889a907e3",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 164,
+    "captured_bytes": 164,
+    "sha256": "869c917a4cc805305143da043806d41659d784d146fb70bae6b461048f69aee8",
+    "truncated": false
+  }
+}

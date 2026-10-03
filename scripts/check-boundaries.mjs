@@ -20,6 +20,20 @@ if (/pdfjs|pdf|lopdf|docx|calamine/i.test(cargo)) {
   console.error("Rust 依赖里出现了格式解析库");
   process.exit(1);
 }
+if (/^(zip|flate2|tar|mp4parse|symphonia|rodio)\s*=/m.test(cargo)) {
+  console.error("Rust 依赖里出现了压缩或影音解析库");
+  process.exit(1);
+}
+const zipReader = readFileSync(new URL("../src/formats/zip/readZip.ts", import.meta.url), "utf8");
+if (/pdfjs|PdfView|ImageView|formats\/pdf|formats\/image/.test(zipReader)) {
+  console.error("压缩包读取代码引用了 PDF 或图片查看器");
+  process.exit(1);
+}
+const mediaView = readFileSync(new URL("../src/formats/media/MediaView.tsx", import.meta.url), "utf8");
+if (/jszip|JSZip|pdfjs/.test(mediaView)) {
+  console.error("影音查看器不该带解析库");
+  process.exit(1);
+}
 
 function walk(dir, hit) {
   for (const name of readdirSync(dir)) {

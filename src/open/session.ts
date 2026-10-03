@@ -5,6 +5,8 @@ export type Current =
   | { kind: "image"; path: string; name: string; url: string }
   | { kind: "pdf"; path: string; name: string; url: string }
   | { kind: "office"; path: string; name: string; url: string }
+  | { kind: "zip"; path: string; name: string; url: string }
+  | { kind: "media"; path: string; name: string; url: string }
   | {
       kind: "text";
       path: string;
@@ -25,20 +27,43 @@ export function recentsAfterOpen(state: Session, current: Current, now: number):
   return remember(state.recents, current.path, current.name, now);
 }
 
-export function recentsAfterOfficeShown(state: Session, path: string, name: string, now: number): Recent[] {
+export function recentsAfterShown(
+  state: Session,
+  kind: "office" | "zip" | "media",
+  path: string,
+  name: string,
+  now: number,
+): Recent[] {
   const current = state.current;
-  if (current.kind !== "office" || current.path !== path) return state.recents;
+  if (current.kind !== kind || current.path !== path) return state.recents;
   return remember(state.recents, path, name, now);
 }
 
+export function recentsAfterOfficeShown(state: Session, path: string, name: string, now: number): Recent[] {
+  return recentsAfterShown(state, "office", path, name, now);
+}
+
 export function blobUrlOf(current: Current): string | null {
-  if (current.kind !== "image" && current.kind !== "pdf" && current.kind !== "office") return null;
+  if (
+    current.kind !== "image" &&
+    current.kind !== "pdf" &&
+    current.kind !== "office" &&
+    current.kind !== "zip" &&
+    current.kind !== "media"
+  ) {
+    return null;
+  }
   return current.url.startsWith("blob:") ? current.url : null;
 }
 
 export function failOpen(state: Session, url: string, message: string): Session {
   const current = state.current;
-  if ((current.kind !== "pdf" && current.kind !== "office") || current.url !== url) return state;
+  if (
+    (current.kind !== "pdf" && current.kind !== "office" && current.kind !== "zip" && current.kind !== "media") ||
+    current.url !== url
+  ) {
+    return state;
+  }
   return {
     ...state,
     current: { kind: "error", path: current.path, name: current.name, message },

@@ -5,6 +5,8 @@ const LOADERS: Partial<Record<EnableKey, () => Promise<unknown>>> = {
   text: () => import("./text/TextView"),
   pdf: () => import("./pdf/PdfView"),
   office: () => import("./office/OfficeView"),
+  zip: () => import("./zip/ZipView"),
+  media: () => import("./media/MediaView"),
 };
 
 export function loaderFor(family: string): (() => Promise<unknown>) | null {

@@ -1,5 +1,5 @@
-import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import type { PDFDocumentProxy, PDFPageProxy } from "pdfjs-dist";
+import { ensurePdfRuntime } from "./pdfPrelude.js";
 import type { PdfDocument, PdfRenderTask } from "./types";
 
 function assetUrl(dir: string): string {
@@ -27,8 +27,9 @@ function adapt(raw: PDFDocumentProxy): PdfDocument {
 }
 
 export async function loadPdfDocument(url: string): Promise<PdfDocument> {
+  ensurePdfRuntime();
   const pdfjs = await import("pdfjs-dist");
-  pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
+  pdfjs.GlobalWorkerOptions.workerSrc = new URL("/pdfjs/pdf.worker.mjs", window.location.href).href;
   const task = pdfjs.getDocument({
     url,
     disableRange: true,

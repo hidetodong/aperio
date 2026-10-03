@@ -74,6 +74,12 @@ export function isLegacyOffice(path: string): boolean {
   return ext === "doc" || ext === "xls" || ext === "ppt";
 }
 
+const SKIPPED_ARCHIVE = new Set(["tar", "gz", "tgz", "gzip"]);
+
+export function isSkippedArchive(path: string): boolean {
+  return SKIPPED_ARCHIVE.has(extensionOf(path));
+}
+
 export function isHeic(path: string): boolean {
   const ext = extensionOf(path);
   return ext === "heic" || ext === "heif";

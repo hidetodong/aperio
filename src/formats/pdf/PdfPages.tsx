@@ -1,16 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import { documentHeight, pageOffset, pagesInView, PDF_PAGE_GAP, PDF_PAGE_HEIGHT } from "./pages";
+import { documentHeight, pageOffset, pagesInView, spreadHeight, spreadLayout, PDF_PAGE_GAP, PDF_PAGE_HEIGHT } from "./pages";
 import type { PdfDocument, PdfRenderTask } from "./types";
 
 function PageCanvas({
   doc,
   pageNumber,
   top,
+  fitWidth,
+  lane,
   onHeight,
 }: {
   doc: PdfDocument;
   pageNumber: number;
   top: number;
+  fitWidth: number;
+  lane: "full" | "left" | "right";
   onHeight: (height: number) => void;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -26,9 +30,11 @@ function PageCanvas({
       .getPage(pageNumber)
       .then((page) => {
         if (cancelled) return;
-        const css = page.getViewport({ scale: 1 });
+        const base = page.getViewport({ scale: 1 });
+        const fit = fitWidth > 0 && base.width > 0 ? fitWidth / base.width : 1;
+        const css = page.getViewport({ scale: fit });
         const ratio = Math.min(globalThis.devicePixelRatio || 1, 2);
-        const bitmap = ratio === 1 ? css : page.getViewport({ scale: ratio });
+        const bitmap = page.getViewport({ scale: fit * ratio });
         canvas.width = Math.max(1, Math.floor(bitmap.width));
         canvas.height = Math.max(1, Math.floor(bitmap.height));
         canvas.style.width = `${css.width}px`;
@@ -42,10 +48,12 @@ function PageCanvas({
       cancelled = true;
       task?.cancel();
     };
-  }, [doc, pageNumber]);
+  }, [doc, pageNumber, fitWidth]);
 
+  const laneStyle =
+    lane === "left" ? { left: 0, width: "50%", right: "auto" } : lane === "right" ? { left: "50%", width: "50%", right: "auto" } : {};
   return (
-    <div className="pdf-page" style={{ top }}>
+    <div className="pdf-page" style={{ top, ...laneStyle }}>
       <canvas ref={ref} data-page={pageNumber} />
     </div>
   );
@@ -57,12 +65,16 @@ export function PdfPages({
   viewHeight,
   pageHeight = PDF_PAGE_HEIGHT,
   gap = PDF_PAGE_GAP,
+  fitWidth = 0,
+  columns = 1,
 }: {
   doc: PdfDocument;
   scrollTop: number;
   viewHeight: number;
   pageHeight?: number;
   gap?: number;
+  fitWidth?: number;
+  columns?: number;
 }) {
   const [heights, setHeights] = useState<number[]>(() => Array.from({ length: doc.numPages }, () => pageHeight));
 
@@ -80,16 +92,22 @@ export function PdfPages({
     });
   }
 
-  const visible = pagesInView({ scrollTop, viewHeight, heights, gap });
+  const paired = columns === 2;
+  const layout = paired ? spreadLayout(heights, gap, 2) : [];
+  const visible = paired
+    ? layout.flatMap((box, index) => (box.row > 0 && box.top + box.row > scrollTop && box.top < scrollTop + viewHeight ? [index + 1] : []))
+    : pagesInView({ scrollTop, viewHeight, heights, gap });
 
   return (
-    <div className="pdf-pages" style={{ position: "relative", height: documentHeight(heights, gap) }}>
+    <div className="pdf-pages" style={{ position: "relative", height: paired ? spreadHeight(layout) : documentHeight(heights, gap) }}>
       {visible.map((pageNumber) => (
         <PageCanvas
           key={pageNumber}
           doc={doc}
           pageNumber={pageNumber}
-          top={pageOffset(heights, pageNumber - 1, gap)}
+          top={paired ? (layout[pageNumber - 1]?.top ?? 0) : pageOffset(heights, pageNumber - 1, gap)}
+          fitWidth={fitWidth}
+          lane={paired ? (pageNumber % 2 === 1 ? "left" : "right") : "full"}
           onHeight={(height) => updateHeight(pageNumber, height)}
         />
       ))}

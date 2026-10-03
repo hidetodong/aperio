@@ -2,14 +2,14 @@
 
 ## 任务断点
 
-- 迭代：ITER-0005；里程碑：MILE-0001；阶段：P3 方案已锁定。
-- 状态：压缩包和影音的验收、方案已自主锁定。代码还没改。
+- 迭代：ITER-0009；里程碑：MILE-0002；阶段：P1 Analysis。
+- 状态：已从会话结晶需求，等待确认 Current Understanding 与 Scope。
 
 ## 关键决策摘要
 
-- 压缩包用已经在依赖里的 JSZip 读名单和单个条目。影音只把地址交给页面里的视频或音频标签，不把整份读成文本。被放弃的做法是在 Rust 里加压缩或影音库，因为格式解析约定留在前端，影音又本来就交给系统。
-- 查看器分成两块，用到才加载。打开压缩包时不顺带把影音放进主包。启用名单把 zip 和 media 打开，原来开着的四个家族不动。
-- 压缩包字节仍由页面通过已经允许的地址去取，不新增 Rust 读全文件的命令。浏览器里先看文件大小，超过 20MB 不交给解析。本机路径仍是先确认文件，取到字节后再按大小拒绝。
+- 版本号、许可证和 npm run check 已经在仓库里。这一段把公开仓库建起来，推上去之后自动跑检查，打版本标签时打出 Mac 包，包只留在构建产物里。
+- 已确认：公开仓库用 hidetodong/aperio。
+- 已确认：推送时跑检查。打版本标签时打出 Mac 包，只作为 GitHub Actions 的构建产物，不自动创建 GitHub Release。
 
 ## 环境脏点
 
@@ -17,13 +17,11 @@
 
 ## 已知风险
 
-- 真窗口没点之前，不能说系统窗口里已经能播。
-- 内容安全策略改完，要重启应用窗口才生效。只刷新页面不够。
-- 未压缩大小若只能在取出之后看到，内存可能先涨一下。这种条目仍然不能交给查看器。
+- N/A
 
 ## 唤醒指令
 
-- 先运行 `python3 tools/handoff/handoff.py check --project-root .`；若 stale，运行同工具 `sync` 后再读 `.ai/task-state.md`。下一动作：按方案实现 ZIP 名单、包内预览和 MP4、MOV、MP3 播放。不改 PDF 成功不进最近列表，也不改已收口的 Office。
+- 先运行 `python3 tools/handoff/handoff.py check --project-root .`；若 stale，运行同工具 `sync` 后再读 `.ai/task-state.md`。下一动作：审阅 `.ai/CONCEPT.md`，确认后进入 P2。
 
 ## 状态指针
 
@@ -32,5 +30,3 @@
 - `.ai/MILESTONES.md`
 - `.ai/MILESTONE.md`
 - `.ai/CONCEPT.md`
-- `.ai/AC_LIST.md`
-- `.ai/TECH_PLAN.md`

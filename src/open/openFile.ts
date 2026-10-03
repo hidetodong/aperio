@@ -1,6 +1,8 @@
 import { isEnabled } from "../formats/enable";
-import { baseName, familyOf, isHeic, isLegacyOffice, languageFor, textMode } from "../formats/route";
-import { MSG } from "../messages";
+import { OFFICE_BYTE_LIMIT } from "../formats/office/model";
+import { ZIP_BYTE_LIMIT } from "../formats/zip/model";
+import { baseName, familyOf, isHeic, isLegacyOffice, isSkippedArchive, languageFor, textMode } from "../formats/route";
+import { MSG, TEXT_LIMIT } from "../messages";
 import type { Current } from "./session";
 
 export type FileIo = {
@@ -36,9 +38,33 @@ export function assertPlainText(text: string): string {
   return text;
 }
 
+export type BrowserPlan =
+  | { kind: "error"; message: string }
+  | { kind: "image" | "pdf" | "office" | "zip" | "media" | "text" };
+
+export function browserPlan(name: string, size: number): BrowserPlan {
+  if (isSkippedArchive(name)) return { kind: "error", message: MSG.archiveSkipped };
+  const family = familyOf(name);
+  if ((family !== "unknown" && !isEnabled(family)) || (family === "unknown" && !isEnabled("text"))) {
+    return { kind: "error", message: MSG.disabled };
+  }
+  if (family === "image" && isHeic(name)) return { kind: "error", message: MSG.heicNeedsApp };
+  if (family === "image" || family === "pdf" || family === "media") return { kind: family };
+  if (family === "office" && isLegacyOffice(name)) return { kind: "error", message: MSG.oldOffice };
+  if (family === "office" && size > OFFICE_BYTE_LIMIT) return { kind: "error", message: MSG.officeTooBig };
+  if (family === "office") return { kind: "office" };
+  if (family === "zip" && size > ZIP_BYTE_LIMIT) return { kind: "error", message: MSG.zipTooBig };
+  if (family === "zip") return { kind: "zip" };
+  if (size > TEXT_LIMIT) return { kind: "error", message: MSG.tooBig };
+  return { kind: "text" };
+}
+
 export async function openLocalPath(path: string, io: FileIo): Promise<Opened> {
   const name = baseName(path);
   const family = familyOf(path);
+  if (isSkippedArchive(path)) {
+    return { current: { kind: "error", path, name, message: MSG.archiveSkipped } };
+  }
   if (family !== "unknown" && !isEnabled(family)) {
     return { current: { kind: "error", path, name, message: MSG.disabled } };
   }
@@ -67,6 +93,10 @@ export async function openLocalPath(path: string, io: FileIo): Promise<Opened> {
       }
       await io.confirmFile(path);
       return { current: { kind: "office", path, name, url: io.fileUrl(path) } };
+    }
+    if (family === "zip" || family === "media") {
+      await io.confirmFile(path);
+      return { current: { kind: family, path, name, url: io.fileUrl(path) } };
     }
     const text = assertPlainText(await io.readText(path));
     const mode = textMode(path);

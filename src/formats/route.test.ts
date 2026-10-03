@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { familyOf, isLegacyOffice, languageFor, textMode } from "./route";
+import { familyOf, isLegacyOffice, isSkippedArchive, languageFor, textMode } from "./route";
 
 describe("扩展名归类", () => {
   it("图片和文本落到对应家族", () => {
@@ -26,6 +26,14 @@ describe("扩展名归类", () => {
     expect(isLegacyOffice("/tmp/a.docx")).toBe(false);
     expect(familyOf("/tmp/a.zip")).toBe("zip");
     expect(familyOf("/tmp/a.mp4")).toBe("media");
+    expect(familyOf("/tmp/a.tar")).toBe("unknown");
+    expect(familyOf("/tmp/a.tar.gz")).toBe("unknown");
+    expect(isSkippedArchive("/tmp/a.tar")).toBe(true);
+    expect(isSkippedArchive("/tmp/a.gz")).toBe(true);
+    expect(isSkippedArchive("/tmp/a.tgz")).toBe(true);
+    expect(isSkippedArchive("/tmp/a.tar.gz")).toBe(true);
+    expect(isSkippedArchive("/tmp/a.zip")).toBe(false);
+    expect(isSkippedArchive("/tmp/a.txt")).toBe(false);
   });
 
   it("只给约定的语言高亮", () => {

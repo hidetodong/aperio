@@ -3,8 +3,8 @@ export const ENABLE = {
   text: true,
   pdf: true,
   office: true,
-  zip: false,
-  media: false,
+  zip: true,
+  media: true,
 } as const;
 
 export type EnableKey = keyof typeof ENABLE;

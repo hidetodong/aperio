@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_id": "fe-tests",
+  "iteration": "ITER-0005",
+  "ac_ids": [
+    "AC1",
+    "AC3",
+    "AC4",
+    "AC5"
+  ],
+  "command": {
+    "argv": [
+      "npm",
+      "test"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-30T02:15:00.208Z",
+  "finished_at": "2026-09-30T02:15:11.310Z",
+  "duration_ms": 11104,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 1272,
+    "captured_bytes": 1272,
+    "sha256": "7e7cc98ed0e93af566a7cc112dfea35c1292611bc47d9592ebd12a4c1ce2e40a",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

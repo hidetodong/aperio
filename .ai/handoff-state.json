@@ -1,60 +1,46 @@
 {
-  "handoff_sha256": "6a60d172b78a2d9ac8be1f4fbd00d2c735334f3e5860033dea13adc4cd5dedaa",
+  "handoff_sha256": "426760dab3f5763cd71d51209890b9d5a6df8662a3151c7374ba4dd60d957ec1",
   "schema_version": 1,
   "snapshot": {
     "decisions": [
-      "压缩包用已经在依赖里的 JSZip 读名单和单个条目。影音只把地址交给页面里的视频或音频标签，不把整份读成文本。被放弃的做法是在 Rust 里加压缩或影音库，因为格式解析约定留在前端，影音又本来就交给系统。",
-      "查看器分成两块，用到才加载。打开压缩包时不顺带把影音放进主包。启用名单把 zip 和 media 打开，原来开着的四个家族不动。",
-      "压缩包字节仍由页面通过已经允许的地址去取，不新增 Rust 读全文件的命令。浏览器里先看文件大小，超过 20MB 不交给解析。本机路径仍是先确认文件，取到字节后再按大小拒绝。"
+      "版本号、许可证和 npm run check 已经在仓库里。这一段把公开仓库建起来，推上去之后自动跑检查，打版本标签时打出 Mac 包，包只留在构建产物里。",
+      "已确认：公开仓库用 hidetodong/aperio。",
+      "已确认：推送时跑检查。打版本标签时打出 Mac 包，只作为 GitHub Actions 的构建产物，不自动创建 GitHub Release。"
     ],
-    "iteration": "ITER-0005",
-    "milestone": "MILE-0001",
-    "next": "按方案实现 ZIP 名单、包内预览和 MP4、MOV、MP3 播放。不改 PDF 成功不进最近列表，也不改已收口的 Office。",
-    "phase": "P3 方案已锁定",
+    "iteration": "ITER-0009",
+    "milestone": "MILE-0002",
+    "next": "审阅 `.ai/CONCEPT.md`，确认后进入 P2。",
+    "phase": "P1 Analysis",
     "pointers": [
       ".ai/task-state.md",
       ".ai/ITERATIONS.md",
       ".ai/MILESTONES.md",
       ".ai/MILESTONE.md",
-      ".ai/CONCEPT.md",
-      ".ai/AC_LIST.md",
-      ".ai/TECH_PLAN.md"
+      ".ai/CONCEPT.md"
     ],
-    "risks": [
-      "真窗口没点之前，不能说系统窗口里已经能播。",
-      "内容安全策略改完，要重启应用窗口才生效。只刷新页面不够。",
-      "未压缩大小若只能在取出之后看到，内存可能先涨一下。这种条目仍然不能交给查看器。"
-    ],
-    "status": "压缩包和影音的验收、方案已自主锁定。代码还没改。"
+    "risks": [],
+    "status": "已从会话结晶需求，等待确认 Current Understanding 与 Scope。"
   },
   "sources": [
     {
       "path": ".ai/task-state.md",
-      "sha256": "ee7ff61333ef583096e725ca34a012a48abb9c53d724563a0baf87efcee5ff02"
+      "sha256": "29ea9d196b2db19b110b1d3e5680082d2cd0b3148098df7eaa7c57b69fd02695"
     },
     {
       "path": ".ai/ITERATIONS.md",
-      "sha256": "b39af497a04cd3a487e2013e3e8833b06690bd13d2f9baf780d3313fd70f9741"
+      "sha256": "2b1a6417375fa9311fbef451ffd7da027f3b474c547bdd3761e200f00ef0882a"
     },
     {
       "path": ".ai/MILESTONES.md",
-      "sha256": "ad351988398736c9852ccef75ada9de7b45c09752f52d17eb0d1d8f9adf0d718"
+      "sha256": "b71d969bfa10c98b7978258276c4ab9ead4dadcbfa23d9936288cde8bbb355ab"
     },
     {
       "path": ".ai/MILESTONE.md",
-      "sha256": "403e55a2074277d2919b909c63a9f4d9b15ec57e74693059f43e115972cda85f"
+      "sha256": "be6b43e7ad2df43fa17ee2511425ff41cb0efe47263df8664176aaccc83df16f"
     },
     {
       "path": ".ai/CONCEPT.md",
-      "sha256": "79272e8c418dc6522b414c5d748907f897dbc44ec7bac565a82d8576909772ee"
-    },
-    {
-      "path": ".ai/AC_LIST.md",
-      "sha256": "decfffc72987dd67bb35a71b83578f57ca5b82bc6829e690f79600eb670af1e2"
-    },
-    {
-      "path": ".ai/TECH_PLAN.md",
-      "sha256": "0904395b10426e4bfbe06ff72099727ac49a944a35bdbf027c7173427270ab19"
+      "sha256": "e5d4b4dc73d7540ac0f95fcec7ef0cf6fbe078557ba0a341ac87cd2b83ce2e8a"
     }
   ]
 }

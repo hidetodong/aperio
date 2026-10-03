@@ -14,6 +14,25 @@ export function documentHeight(heights: number[], gap: number): number {
   return total + gap * (heights.length - 1);
 }
 
+export function spreadLayout(heights: number[], gap: number, columns: number): { top: number; row: number }[] {
+  const cols = columns === 2 ? 2 : 1;
+  const out = heights.map(() => ({ top: 0, row: 0 }));
+  let y = 0;
+  for (let i = 0; i < heights.length; i += cols) {
+    let row = 0;
+    for (let c = 0; c < cols && i + c < heights.length; c += 1) row = Math.max(row, heights[i + c] ?? 0);
+    for (let c = 0; c < cols && i + c < heights.length; c += 1) out[i + c] = { top: y, row };
+    y += row + (i + cols < heights.length ? gap : 0);
+  }
+  return out;
+}
+
+export function spreadHeight(layout: { top: number; row: number }[]): number {
+  let height = 0;
+  for (const box of layout) height = Math.max(height, box.top + box.row);
+  return height;
+}
+
 export function pagesInView(input: {
   scrollTop: number;
   viewHeight: number;

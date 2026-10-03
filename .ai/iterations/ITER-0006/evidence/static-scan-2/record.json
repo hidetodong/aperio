@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_id": "static-scan-2",
+  "iteration": "ITER-0006",
+  "ac_ids": [
+    "AC1",
+    "AC3",
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "python3",
+      "-c",
+      "\nimport json, pathlib, sys\nroot = pathlib.Path(\".\")\nneedles = [\"#3d63dd\", \"#3D63DD\", \"61, 99, 221\", \"61,99,221\", \"#2f4fb8\"]\nbad = []\nfor path in root.joinpath(\"src\").rglob(\"*\"):\n    if path.suffix.lower() not in {\".css\", \".tsx\", \".ts\"}:\n        continue\n    text = path.read_text(encoding=\"utf-8\")\n    for needle in needles:\n        if needle in text:\n            bad.append(f\"{path}: {needle}\")\npkg = json.loads(root.joinpath(\"package.json\").read_text(encoding=\"utf-8\"))\nif \"lucide-react\" in json.dumps(pkg):\n    bad.append(\"package.json contains lucide-react\")\ncss = root.joinpath(\"src/shell/shell.css\").read_text(encoding=\"utf-8\")\nif \"translateY(-1.5px)\" not in css:\n    bad.append(\"title nudge missing\")\nif pkg.get(\"name\") != \"emerge\":\n    bad.append(\"package name changed\")\nconf = root.joinpath(\"src-tauri/tauri.conf.json\").read_text(encoding=\"utf-8\")\nif \"\\\"identifier\\\": \\\"local.emerge.app\\\"\" not in conf:\n    bad.append(\"bundle identifier changed\")\ntokens = root.joinpath(\"src/shell/tokens.css\").read_text(encoding=\"utf-8\")\nhandoff = pathlib.Path(\"/tmp/aperio-v11/design_handoff_aperio/tokens.css\").read_text(encoding=\"utf-8\")\nif tokens != handoff:\n    bad.append(\"tokens.css differs from v1.1\")\nif bad:\n    print(\"\\n\".join(bad))\n    sys.exit(1)\nprint(\"old accent gone; tokens match; no lucide; title nudge kept; name and identifier kept\")\n"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-30T09:52:15.944Z",
+  "finished_at": "2026-09-30T09:52:16.019Z",
+  "duration_ms": 75,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 85,
+    "captured_bytes": 85,
+    "sha256": "506d7df3ba8fa5c2cb5eb8687dd299dec0e52d67083f714cd0475c49a632d851",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

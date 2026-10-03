@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "evidence_id": "review-fe-tests",
+  "iteration": "ITER-0006",
+  "ac_ids": [
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "npx",
+      "vitest",
+      "run"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-09-30T09:52:45.372Z",
+  "finished_at": "2026-09-30T09:52:50.437Z",
+  "duration_ms": 5065,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 1331,
+    "captured_bytes": 1331,
+    "sha256": "b41dcf87a57afc832523bd6e5176e23e44094769be2bcd60251b4f910f14b69d",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

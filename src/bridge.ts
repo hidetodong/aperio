@@ -38,3 +38,39 @@ export function readRecents(): Promise<Recent[]> {
 export function writeRecents(items: Recent[]): Promise<void> {
   return invoke("write_recents", { items });
 }
+
+export type ListedFile = {
+  path: string;
+  name: string;
+  size: number;
+  modifiedMs: number;
+  isDir?: boolean;
+  folderCount?: number;
+  fileCount?: number;
+  rel?: string;
+};
+
+export function listPlace(place: string): Promise<ListedFile[]> {
+  return invoke<ListedFile[]>("list_place", { place });
+}
+
+export function listDirectory(path: string): Promise<ListedFile[]> {
+  return invoke<ListedFile[]>("list_directory", { path });
+}
+
+export function listTree(path: string): Promise<ListedFile[]> {
+  return invoke<ListedFile[]>("list_tree", { path });
+}
+
+export async function pickDirectory(): Promise<string | null> {
+  const picked = await open({ multiple: false, directory: true });
+  return typeof picked === "string" ? picked : null;
+}
+
+export function extractZip(archive: string, dest: string): Promise<void> {
+  return invoke("extract_zip", { archive, dest });
+}
+
+export function revealInFinder(path: string): Promise<void> {
+  return invoke("reveal_in_finder", { path });
+}

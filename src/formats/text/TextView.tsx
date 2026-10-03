@@ -20,7 +20,20 @@ export function HtmlFrame({ html, name }: { html: string; name: string }) {
   return <iframe data-viewer="text" sandbox="" srcDoc={html} title={name} />;
 }
 
-export default function TextView({ name, mode, text, language }: TextPayload) {
+export default function TextView({ name, mode, text, language, lined = false }: TextPayload & { lined?: boolean }) {
+  if (mode === "code" && language && lined) {
+    const lines = highlightCode(text, language).split("\n");
+    return (
+      <div className="code-lines" data-viewer="text">
+        {lines.map((line, index) => (
+          <div className="code-line" key={index}>
+            <span className="code-gutter">{index + 1}</span>
+            <span dangerouslySetInnerHTML={{ __html: line.length ? line : " " }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
   if (mode === "markdown") {
     return (
       <article

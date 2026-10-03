@@ -1,7 +1,6 @@
 {
   "name": "emerge",
-  "private": true,
-  "version": "0.1.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +8,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "check:chunks": "node scripts/check-chunks.mjs",
+    "check": "node scripts/check-release.mjs && node scripts/check-boundaries.mjs && npm test && npm run build && npm run check:chunks",
     "tauri": "tauri"
   },
   "dependencies": {
