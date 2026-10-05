@@ -13,9 +13,29 @@
   <img alt="0.0.1" src="https://img.shields.io/badge/version-0.0.1-blue">
 </p>
 
+<p align="center">
+  <a href="#简介">简介</a> ·
+  <a href="#功能">功能</a> ·
+  <a href="#安装">安装</a> ·
+  <a href="#使用指南">使用指南</a> ·
+  <a href="#开发">开发</a>
+</p>
+
+## 简介
+
+Aperio 是 macOS 上的本地文件查看器。窗口用的是系统自带的 WebKit，不另带浏览器。文件留在原来的位置，应用只读，不改原件。
+
+日常能看的是 PDF、图片、文本和代码、Word、Excel、PPT、CSV、mp4、mov、mp3，以及 zip。不能编辑，不能转换格式，也没有 Windows 版。
+
 界面和安装包的名字是 Aperio。npm 包名和 Rust 包名仍是 `emerge`，Rust 库是 `emerge_lib`。
 
 ## 功能
+
+- 把文件拖进窗口就能看。一次拖进多个文件时，按拖入顺序切换。
+- 目录列出你打开过的文件夹。网格和列表可以换。
+- 图片可以旋转、翻转和缩放。PDF 可以单页或双页。文本和代码可以改字号。
+- zip 先列出内容，再预览里面的图片、文本和 PDF，也可以解压到选定目录。
+- 最近打开只记记录，不删磁盘上的文件。
 
 | 类型 | 格式 | 说明 |
 | --- | --- | --- |
@@ -29,9 +49,37 @@
 
 没列在表里的文件，只要内容是纯文本，也会按文本打开，没有语法高亮。
 
-## 使用指南
+## 安装
 
-还没构建的话，先看下面的「从源码构建」。应用跑起来之后按这里用。
+目前没有可下载的安装包。在自己的 Mac 上从源码构建。仓库在 https://github.com/hidetodong/aperio。
+
+### 要求
+
+- macOS
+- Node.js `^20.19.0` 或 `>=22.12.0`
+- Rust stable
+- 打包时需要 Xcode 命令行工具
+
+应用使用 Tauri 2。
+
+### 从源码运行
+
+```bash
+git clone https://github.com/hidetodong/aperio.git
+cd aperio
+npm install
+npm run tauri dev
+```
+
+### 打出本机安装包
+
+```bash
+npm run tauri build
+```
+
+产物在 `src-tauri/target/release/bundle/`。这个包没有公证。
+
+## 使用指南
 
 ### 打开一个文件
 
@@ -46,7 +94,7 @@
 首页有两个入口：
 
 - 「浏览目录」进入目录，并保留上一次的筛选。
-- 「最近打开」只看打开记录，不删磁盘上的文件。成功打开的 PDF 不会出现在这里。
+- 「最近打开」只看打开记录。成功打开的 PDF 不会出现在这里。
 
 ### 目录
 
@@ -96,34 +144,6 @@
 - 文本超过 2MB 不整份读入。Office 和 ZIP 超过 20MB 不整份解析。
 - 打开成功的 PDF 不写入最近打开。
 
-## 要求
-
-- macOS
-- Node.js `^20.19.0` 或 `>=22.12.0`
-- Rust stable
-- 打包时需要 Xcode 命令行工具
-
-应用使用 Tauri 2。窗口里是系统自带的 WebKit，不另带浏览器。
-
-## 从源码构建
-
-仓库在 https://github.com/hidetodong/aperio。
-
-```bash
-git clone https://github.com/hidetodong/aperio.git
-cd aperio
-npm install
-npm run tauri dev
-```
-
-打出本机安装包：
-
-```bash
-npm run tauri build
-```
-
-产物在 `src-tauri/target/release/bundle/`。
-
 ## 开发
 
 发版前跑：
@@ -142,16 +162,13 @@ npm run build
 npm run check:chunks
 ```
 
-## 状态
+推送到仓库后，GitHub Actions 会跑同一条 `npm run check`。推送 `v` 开头的版本标签时，会在 macOS 构建机上打出安装包，挂在该次构建的产物里，不自动创建 Release。
+
+## 项目状态
 
 版本号是 `0.0.1`，写在 `package.json`、`src-tauri/Cargo.toml`、`src-tauri/tauri.conf.json`。
 
-还没有 GitHub Release，也没有发给别人的安装包。
-
-- 仓库是 https://github.com/hidetodong/aperio。
-- 推送到仓库后，GitHub Actions 会跑 `npm run check`。
-- 推送 `v` 开头的版本标签时，会在 macOS 构建机上打出安装包，挂在该次构建的产物里，不自动创建 Release。这个包没有公证。
-- 不做公证、自动更新、网站、Windows 版、收费和插件。
+还没有 GitHub Release，也没有发给别人的安装包。不做公证、自动更新、网站、Windows 版、收费和插件。
 
 ## 许可证
 
