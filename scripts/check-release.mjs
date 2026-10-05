@@ -39,6 +39,9 @@ if (!readme.includes("npm run check") || !readme.includes("[MIT](LICENSE)") || !
 if (!readme.includes("https://github.com/hidetodong/aperio")) {
   fail("README 没有写上仓库地址");
 }
+if (!readme.includes("docs/aperio-logo.svg") || !readme.includes("## 使用指南") || !readme.includes("<h1 align=\"center\">Aperio</h1>")) {
+  fail("README 没有标志、主标题或使用指南");
+}
 if (readme.includes("0.1.0") || readme.includes("远程还没加上") || readme.includes("这个地址现在不存在") || readme.includes("仓库还没有远程")) {
   fail("README 还写着旧版本号，或仍写远程不存在");
 }
