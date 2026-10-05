@@ -453,7 +453,7 @@ mod tests {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let dir = std::env::temp_dir().join(format!("emerge-recents-{nanos}"));
+        let dir = std::env::temp_dir().join(format!("aperio-recents-{nanos}"));
         let path = dir.join("recents.json");
         assert!(load_recents(&path).unwrap().is_empty());
 
@@ -492,8 +492,8 @@ mod tests {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let cache = std::env::temp_dir().join(format!("emerge-cache-{nanos}"));
-        let outside = std::env::temp_dir().join(format!("emerge-outside-{nanos}.png"));
+        let cache = std::env::temp_dir().join(format!("aperio-cache-{nanos}"));
+        let outside = std::env::temp_dir().join(format!("aperio-outside-{nanos}.png"));
         fs::create_dir_all(&cache).unwrap();
         let keep = cache.join("keep.png");
         let other = cache.join("other.png");
@@ -518,7 +518,7 @@ mod tests {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let cache = std::env::temp_dir().join(format!("emerge-stale-{nanos}"));
+        let cache = std::env::temp_dir().join(format!("aperio-stale-{nanos}"));
         fs::create_dir_all(&cache).unwrap();
         let older = cache.join("current-1.png");
         let newer = cache.join("current-2.png");
@@ -553,7 +553,7 @@ mod tests {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let dir = std::env::temp_dir().join(format!("emerge-list-{nanos}"));
+        let dir = std::env::temp_dir().join(format!("aperio-list-{nanos}"));
         fs::create_dir_all(dir.join("sub")).unwrap();
         fs::write(dir.join("b.txt"), b"hi").unwrap();
         fs::write(dir.join(".secret"), b"no").unwrap();
@@ -571,7 +571,7 @@ mod tests {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let dir = std::env::temp_dir().join(format!("emerge-tree-{nanos}"));
+        let dir = std::env::temp_dir().join(format!("aperio-tree-{nanos}"));
         fs::create_dir_all(dir.join("sub/nested")).unwrap();
         fs::write(dir.join("a.txt"), b"hi").unwrap();
         fs::write(dir.join("sub/b.txt"), b"yo").unwrap();

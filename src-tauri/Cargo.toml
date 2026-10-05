@@ -1,12 +1,12 @@
 [package]
-name = "emerge"
+name = "aperio"
 version = "0.0.1"
 description = "Aperio，自己 Mac 上的轻阅读器"
 authors = []
 edition = "2021"
 
 [lib]
-name = "emerge_lib"
+name = "aperio_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [[bin]]

@@ -1,10 +1,10 @@
 # Task State
 
 - 当前迭代：无 active
-- 当前里程碑：无 active
+- 当前里程碑：MILE-0003
 - 阶段：无
-- 状态：MILE-0002 已收口。公开仓库是 hidetodong/aperio。v0.0.1 的 Mac 包在 Actions 产物里，没有 GitHub Release。
-- 下一动作：无。
+- 状态：先做图片和视频的更多格式。建议沿用窗口直出和系统转 PNG。办法还没定，路线先不拆。
+- 下一动作：确认这个办法后，再点名第一批扩展名并开第一段。
 
 # Goal Calibration
 

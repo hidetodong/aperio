@@ -4,7 +4,7 @@
     "iterations": {
       "cold_count": 0,
       "hot_count": 9,
-      "hot_sha256": "7298d0a23cc510913cc771b7e925f058bccb4e9fedfc1581589839149cabf606",
+      "hot_sha256": "20badd9e54c1ecfe21b94249f5e504f21fbbc6fa13f5b020f607d18f23d32d3b",
       "max_used": 9,
       "routing": {
         "directory": ".ai/history/iterations",
@@ -18,9 +18,9 @@
     },
     "milestones": {
       "cold_count": 0,
-      "hot_count": 2,
-      "hot_sha256": "9a46bb4dc4ccb2a82f21d0caf0ae4ff5fedf5845e67ef54284fa58ec34910fac",
-      "max_used": 2,
+      "hot_count": 3,
+      "hot_sha256": "2adde60142ca1c6fbec584de79fd045ab43960b12374cc7f59d82e9123ff3362",
+      "max_used": 3,
       "routing": {
         "directory": ".ai/history/milestones",
         "minimum_width": 6,
@@ -28,7 +28,7 @@
         "receipt_suffix": ".json",
         "scheme": "fixed-range-v1"
       },
-      "row_count": 2,
+      "row_count": 3,
       "shard_count": 0
     }
   },

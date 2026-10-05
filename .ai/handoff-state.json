@@ -1,32 +1,37 @@
 {
-  "handoff_sha256": "68c99b1bd1ecfe934f083f88a63ee394df887f038d1ec482afc6bbd92de02d95",
+  "handoff_sha256": "390f08bab0b2380e654ed9bdf47e6815196d3c4f385bfc1d220d8d81dcea9a06",
   "schema_version": 1,
   "snapshot": {
     "decisions": [],
     "iteration": "none",
-    "milestone": "none",
-    "next": "无。",
+    "milestone": "MILE-0003",
+    "next": "确认这个办法后，再点名第一批扩展名并开第一段。",
     "phase": "无",
     "pointers": [
       ".ai/task-state.md",
       ".ai/ITERATIONS.md",
-      ".ai/MILESTONES.md"
+      ".ai/MILESTONES.md",
+      ".ai/MILESTONE.md"
     ],
     "risks": [],
-    "status": "MILE-0002 已收口。公开仓库是 hidetodong/aperio。v0.0.1 的 Mac 包在 Actions 产物里，没有 GitHub Release。"
+    "status": "先做图片和视频的更多格式。建议沿用窗口直出和系统转 PNG。办法还没定，路线先不拆。"
   },
   "sources": [
     {
       "path": ".ai/task-state.md",
-      "sha256": "4cf3d40f35772b007ae64c3985b8c4506455863fdd40daf68265b2e844d516dd"
+      "sha256": "ef39a1fe8ec7939645d0c6fd6b2b6a99d5d768109e06e559972851141b8936ad"
     },
     {
       "path": ".ai/ITERATIONS.md",
-      "sha256": "7298d0a23cc510913cc771b7e925f058bccb4e9fedfc1581589839149cabf606"
+      "sha256": "20badd9e54c1ecfe21b94249f5e504f21fbbc6fa13f5b020f607d18f23d32d3b"
     },
     {
       "path": ".ai/MILESTONES.md",
-      "sha256": "9a46bb4dc4ccb2a82f21d0caf0ae4ff5fedf5845e67ef54284fa58ec34910fac"
+      "sha256": "2adde60142ca1c6fbec584de79fd045ab43960b12374cc7f59d82e9123ff3362"
+    },
+    {
+      "path": ".ai/MILESTONE.md",
+      "sha256": "78b70159d1d959029fd4d66a1e82161ff67b0b302ccea845a1aff5211be21f16"
     }
   ]
 }

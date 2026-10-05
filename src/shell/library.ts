@@ -24,7 +24,8 @@ export type SideFolder = {
 
 export type Crumb = { name: string; rel: string };
 
-const ROOTS_KEY = "emerge.roots";
+const ROOTS_KEY = "aperio.roots";
+const LEGACY_ROOTS_KEY = "emerge.roots";
 
 export function asEntry(file: ListedFile): DirEntry {
   return {
@@ -39,10 +40,20 @@ export function asEntry(file: ListedFile): DirEntry {
   };
 }
 
+function readRootsRaw(): string | null {
+  const current = localStorage.getItem(ROOTS_KEY);
+  if (current !== null) return current;
+  const legacy = localStorage.getItem(LEGACY_ROOTS_KEY);
+  if (legacy === null) return null;
+  localStorage.setItem(ROOTS_KEY, legacy);
+  localStorage.removeItem(LEGACY_ROOTS_KEY);
+  return legacy;
+}
+
 export function loadRoots(): string[] {
   if (typeof localStorage === "undefined") return [];
   try {
-    const data = JSON.parse(localStorage.getItem(ROOTS_KEY) ?? "null") as unknown;
+    const data = JSON.parse(readRootsRaw() ?? "null") as unknown;
     if (!Array.isArray(data)) return [];
     return data.filter((item): item is string => typeof item === "string" && item.startsWith("/"));
   } catch {

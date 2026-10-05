@@ -1,6 +1,7 @@
 import { DEFAULT_ASSOC, DEFAULT_PREFS, type Assoc, type Prefs } from "./catalog";
 
-const KEY = "emerge.shell";
+const KEY = "aperio.shell";
+const LEGACY_KEY = "emerge.shell";
 
 export type StoredShell = { prefs: Prefs; assoc: Assoc };
 
@@ -44,9 +45,19 @@ export function parseStored(raw: string | null): StoredShell {
   }
 }
 
+function readStoredRaw(): string | null {
+  const current = localStorage.getItem(KEY);
+  if (current !== null) return current;
+  const legacy = localStorage.getItem(LEGACY_KEY);
+  if (legacy === null) return null;
+  localStorage.setItem(KEY, legacy);
+  localStorage.removeItem(LEGACY_KEY);
+  return legacy;
+}
+
 export function loadStored(): StoredShell {
   if (typeof localStorage === "undefined") return { prefs: DEFAULT_PREFS, assoc: DEFAULT_ASSOC };
-  return parseStored(localStorage.getItem(KEY));
+  return parseStored(readStoredRaw());
 }
 
 export function saveStored(value: StoredShell) {

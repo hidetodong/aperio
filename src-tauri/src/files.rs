@@ -71,7 +71,7 @@ mod tests {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        std::env::temp_dir().join(format!("emerge-{name}-{nanos}"))
+        std::env::temp_dir().join(format!("aperio-{name}-{nanos}"))
     }
 
     #[test]
@@ -89,7 +89,7 @@ mod tests {
         assert_eq!(read_text_file(&binary).unwrap_err(), NOT_TEXT);
 
         assert_eq!(
-            read_text_file(Path::new("/tmp/emerge-missing-file.txt")).unwrap_err(),
+            read_text_file(Path::new("/tmp/aperio-missing-file.txt")).unwrap_err(),
             NOT_FOUND
         );
 

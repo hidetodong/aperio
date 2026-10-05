@@ -11,7 +11,7 @@ const conf = JSON.parse(readFileSync(new URL("../src-tauri/tauri.conf.json", imp
 const cargo = readFileSync(new URL("../src-tauri/Cargo.toml", import.meta.url), "utf8");
 const cargoLock = readFileSync(new URL("../src-tauri/Cargo.lock", import.meta.url), "utf8");
 const cargoVersion = cargo.match(/^version = "([^"]+)"/m)?.[1];
-const cargoLockVersion = cargoLock.match(/name = "emerge"\nversion = "([^"]+)"/)?.[1];
+const cargoLockVersion = cargoLock.match(/name = "aperio"\nversion = "([^"]+)"/)?.[1];
 const license = readFileSync(new URL("../LICENSE", import.meta.url), "utf8");
 const readme = readFileSync(new URL("../README.md", import.meta.url), "utf8");
 
@@ -26,6 +26,12 @@ const versions = {
 const mismatched = Object.entries(versions).filter(([, version]) => version !== "0.0.1");
 if (mismatched.length > 0) {
   fail(`版本号不一致：${mismatched.map(([name, version]) => `${name}=${version}`).join("，")}`);
+}
+if (pkg.name !== "aperio") {
+  fail("包名不是 aperio");
+}
+if (!/^name = "aperio"$/m.test(cargo) || !cargo.includes('name = "aperio_lib"')) {
+  fail("Rust 包名或库名不是 aperio");
 }
 if ("private" in pkg) {
   fail("package.json 还标着 private");
