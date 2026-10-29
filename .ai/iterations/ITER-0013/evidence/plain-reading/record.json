@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "evidence_id": "plain-reading",
+  "iteration": "ITER-0013",
+  "ac_ids": [
+    "AC1",
+    "AC2",
+    "AC3",
+    "AC4",
+    "AC5",
+    "AC6"
+  ],
+  "command": {
+    "argv": [
+      "npx",
+      "vitest",
+      "run",
+      "src/formats/text/TextView.test.tsx",
+      "src/formats/text/render.test.ts",
+      "src/formats/route.test.ts",
+      "src/shell/ViewerFrame.test.tsx"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-28T08:00:53.119Z",
+  "finished_at": "2026-10-28T08:00:54.983Z",
+  "duration_ms": 1864,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 450,
+    "captured_bytes": 450,
+    "sha256": "c0baf2c83985d66a026405c968c2f7505ad6ff8699fd713f52943017be6c0623",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

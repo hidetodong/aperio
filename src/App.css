@@ -138,7 +138,7 @@ img[data-viewer="image"] {
 }
 
 .doc-scroll[data-kind="markdown"] article,
-.doc-scroll[data-kind="plain"] pre {
+.doc-scroll[data-kind="plain"] article {
   max-width: var(--col, 820px);
   margin: 0 auto;
   padding: var(--doc-pad, 64px 64px 104px);
@@ -147,8 +147,23 @@ img[data-viewer="image"] {
   color: #3a3a3c;
 }
 
-.doc-scroll[data-kind="plain"] pre {
+.doc-scroll[data-kind="plain"] article {
+  font-family: var(--font-sans);
   white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.doc-scroll[data-kind="markdown"] pre.md-source,
+.doc-scroll[data-kind="html"] pre.html-source {
+  max-width: var(--col, 820px);
+  margin: 0 auto;
+  padding: var(--doc-pad, 64px 64px 104px);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--read-size, 15px);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #1d1d1f;
 }
 
 .doc-scroll article :is(p, ul, ol, pre, blockquote) {
@@ -156,15 +171,60 @@ img[data-viewer="image"] {
 }
 
 .doc-scroll article :is(h1, h2, h3) {
+  /* 文章底一直是白的，不能跟着窗口深色主题把字改成浅色 */
   color: #1d1d1f;
   font-weight: 600;
-  font-size: 15px;
+  line-height: 1.35;
   margin: 28px 0 0;
 }
 
 .doc-scroll article h1 {
-  font-size: 20px;
+  font-size: var(--text-lg, 20px);
   margin-top: 0;
+}
+
+.doc-scroll article h2 {
+  font-size: 17px;
+}
+
+.doc-scroll article h3 {
+  font-size: var(--text-md, 15px);
+}
+
+.doc-scroll article a {
+  color: var(--accent, #2f6fd1);
+  text-decoration: none;
+}
+
+.doc-scroll article a:hover {
+  text-decoration: underline;
+}
+
+.doc-scroll article img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.doc-scroll article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.doc-scroll article :is(th, td) {
+  border: 1px solid #e6e6ea;
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.doc-scroll article th {
+  background: #f7f7f5;
+  color: #1d1d1f;
+  font-weight: 600;
 }
 
 .doc-scroll article > :first-child {
@@ -279,6 +339,7 @@ img[data-viewer="image"] {
 
 .doc-scroll .hljs-comment { color: #6e6e73; }
 
+.doc-scroll[data-kind="html"] .html-host,
 .doc-scroll[data-kind="html"] iframe {
   width: 100%;
   height: 100%;

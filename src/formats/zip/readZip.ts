@@ -38,6 +38,11 @@ function mimeFor(name: string): string {
   if (ext === "gif") return "image/gif";
   if (ext === "webp") return "image/webp";
   if (ext === "svg") return "image/svg+xml";
+  if (ext === "bmp") return "image/bmp";
+  if (ext === "ico") return "image/x-icon";
+  if (ext === "avif") return "image/avif";
+  if (ext === "jxl") return "image/jxl";
+  if (ext === "tif" || ext === "tiff") return "image/tiff";
   return "application/octet-stream";
 }
 

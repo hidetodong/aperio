@@ -1,6 +1,6 @@
-const IMAGE = new Set(["jpg", "jpeg", "png", "gif", "webp", "svg", "heic", "heif"]);
+const IMAGE = new Set(["jpg", "jpeg", "png", "gif", "webp", "svg", "heic", "heif", "bmp", "ico", "avif", "jxl", "tif", "tiff"]);
 const OFFICE = new Set(["doc", "docx", "xls", "xlsx", "ppt", "pptx", "csv"]);
-const MEDIA = new Set(["mp4", "mov", "mp3"]);
+const MEDIA = new Set(["mp4", "mov", "m4v", "mkv", "avi", "wmv", "mp3"]);
 
 const CODE: Record<string, string> = {
   js: "javascript",
@@ -83,4 +83,9 @@ export function isSkippedArchive(path: string): boolean {
 export function isHeic(path: string): boolean {
   const ext = extensionOf(path);
   return ext === "heic" || ext === "heif";
+}
+
+export function needsPlaybackPrep(path: string): boolean {
+  const ext = extensionOf(path);
+  return ext === "mkv" || ext === "avi" || ext === "wmv";
 }

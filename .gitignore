@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 src-tauri/target
+src-tauri/resources/ffmpeg
+src-tauri/resources/ffmpeg.sha256

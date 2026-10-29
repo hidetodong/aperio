@@ -29,6 +29,23 @@ export function installPromiseTry(ctor) {
   ctor.try = (fn, ...args) => new Promise((resolve) => resolve(fn(...args)));
 }
 
+export function installSumPrecise(math) {
+  if (typeof math.sumPrecise === "function") return;
+  // butler-min: Safari 18 没有 Math.sumPrecise。pdf.js 用它加字体名字表的字节数，
+  // 那些都是不大的整数，普通加法的结果和精确求和一样。
+  // 升级路径：如果以后要加很长的小数序列，再换成补偿求和。
+  math.sumPrecise = (values) => {
+    let sum = 0;
+    for (const value of values) {
+      if (typeof value !== "number") {
+        throw new TypeError("Math.sumPrecise expects a number");
+      }
+      sum += value;
+    }
+    return sum;
+  };
+}
+
 export function installBase64(proto, ctor) {
   if (typeof proto.toBase64 !== "function") {
     proto.toBase64 = function () {
@@ -57,6 +74,7 @@ export function ensurePdfRuntime() {
   installIterator(globalThis);
   installMapUpsert(Map.prototype);
   installPromiseTry(Promise);
+  installSumPrecise(Math);
   installBase64(Uint8Array.prototype, Uint8Array);
 }
 

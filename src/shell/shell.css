@@ -1521,11 +1521,14 @@
   border: 0;
   border-radius: 50%;
   background: #fff;
-  color: #1d1d1f;
   display: grid;
   place-items: center;
   cursor: pointer;
   flex: none;
+}
+
+.app button.video-play {
+  color: #1d1d1f;
 }
 
 .video-time {

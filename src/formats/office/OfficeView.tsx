@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { UNSUPPORTED_FORMAT } from "../../messages";
 import { explainFailure } from "../../open/openFile";
 import { OfficeBody } from "./OfficeBody";
 import type { OfficeModel } from "./model";
@@ -47,7 +48,7 @@ function OfficeSession({
 
 async function readOfficeFile(url: string, name: string): Promise<OfficeModel> {
   const response = await fetch(url);
-  if (!response.ok) throw new Error("打不开");
+  if (!response.ok) throw new Error(UNSUPPORTED_FORMAT);
   const bytes = await response.arrayBuffer();
   const { readOffice } = await import("./readOffice");
   return readOffice(name, bytes);

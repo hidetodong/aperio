@@ -38,11 +38,11 @@ Aperio 是 Mac 上的文件查看器。文件留在原来的位置，只看，�
 | 类型 | 格式 | 说明 |
 | --- | --- | --- |
 | PDF | `.pdf` | 只查看 |
-| 图片 | `.jpg` `.jpeg` `.png` `.gif` `.webp` `.svg` `.heic` `.heif` | HEIC 可以直接看 |
+| 图片 | `.jpg` `.jpeg` `.png` `.gif` `.webp` `.svg` `.heic` `.heif` `.bmp` `.ico` `.avif` `.jxl` `.tif` `.tiff` | HEIC 可以直接看 |
 | 文本 | `.md` `.markdown` `.txt` `.html` `.htm` | Markdown 会排成文章 |
 | 代码 | `.js` `.jsx` `.mjs` `.cjs` `.ts` `.tsx` `.json` `.py` `.go` `.rs` `.sql` `.yml` `.yaml` `.css` `.sh` `.bash` `.zsh` | 带颜色区分 |
 | Office | `.docx` `.xlsx` `.pptx` `.csv` | 只看内容，不还原原来的版式 |
-| 影音 | `.mp4` `.mov` `.mp3` | 在应用里播放 |
+| 影音 | `.mp4` `.mov` `.m4v` `.mkv` `.avi` `.wmv` `.mp3` | 在应用里播放 |
 | 压缩包 | `.zip` | 列出内容，预览其中的图片、文本和 PDF，可解压到选定文件夹 |
 
 表里没写的文件，只要里面是普通文字，也会按文本打开，只是没有颜色区分。
@@ -145,6 +145,8 @@ npm run tauri build
 ```
 
 产物在 `src-tauri/target/release/bundle/`。这个包还不能直接发给别人安装。
+
+打开和打包前会下载一份 Apple 芯片的 FFmpeg，只为播放 MKV、AVI 和 WMV。这份程序不放进仓库。它是 GPLv3，来源写在 `src-tauri/resources/FFMPEG_SOURCE.txt`。没有它时，MKV、AVI 和 WMV 会说明播放组件没装好。MP4、MOV 和 M4V 不依赖它。
 
 发版前跑：
 

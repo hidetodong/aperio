@@ -5,6 +5,11 @@
 current: none
 | 迭代号 | 标题 | 状态 | 开启 | 收口 | 所属 milestone | 交付 |
 |---|---|---|---|---|---|---|
+| ITER-0014 | 打开网页失败不把窗口打挂（危险模式） | closed | 2026-10-28 | 2026-10-28 | MILE-0003 | .ai/deliveries/ITER-0014-html-isolation.md |
+| ITER-0013 | 文字排版和代码高亮 | closed | 2026-10-28 | 2026-10-28 | MILE-0003 | .ai/deliveries/ITER-0013-text-layout.md |
+| ITER-0012 | 网页打开失败不打挂，Markdown 能看清 | closed | 2026-10-28 | 2026-10-28 | MILE-0003 | .ai/deliveries/ITER-0012-markdown-read.md |
+| ITER-0011 | 播放 WMV | closed | 2026-10-06 | 2026-10-08 | MILE-0003 | .ai/deliveries/ITER-0011-wmv.md |
+| ITER-0010 | 第一批图片和视频格式 | closed | 2026-10-06 | 2026-10-06 | MILE-0003 | .ai/deliveries/ITER-0010-first-formats.md |
 | ITER-0009 | 上传 GitHub 并配上自动检查和 Mac 打包 | closed | 2026-10-03 | 2026-10-03 | MILE-0002 | .ai/deliveries/ITER-0009-github-actions.md |
 | ITER-0008 | 对齐 v0.0.1 并补上发版检查 | closed | 2026-10-03 | 2026-10-03 | MILE-0002 | .ai/deliveries/ITER-0008-release-prep.md |
 | ITER-0007 | 按开源项目写 README | closed | 2026-10-03 | 2026-10-03 | MILE-0002 | .ai/deliveries/ITER-0007-oss-readme.md |
@@ -21,3 +26,4 @@ current: none
 > ITER-0004 由危险模式推进。写入上限与上一段相同，没有扩大。
 > ITER-0005 由危险模式推进。写入上限与上一段相同，没有扩大。
 > ITER-0006 由危险模式推进。写入上限只限 `/Users/cyborgno2/Documents/research/emerge`。本段开始前工作树已有未提交改动，没有单独的干净提交可回退。
+> ITER-0014 由危险模式推进。写入上限只限 `/Users/cyborgno2/Documents/research/aperio`。工作区本来就有未提交改动，这一轮没有单独提交。

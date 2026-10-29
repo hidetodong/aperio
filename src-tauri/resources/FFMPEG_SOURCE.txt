@@ -1,0 +1,6 @@
+这份播放组件是 FFmpeg 9.0，只用于 Apple 芯片的 Mac。
+构建时从下面这个地址下载，不提交进仓库：
+https://ffmpeg.martin-riedl.de/download/macos/arm64/1785863997_9.0/ffmpeg.zip
+
+该构建启用了 GPL。Aperio 把它作为单独程序调用，不链进应用本体，也不修改用户的原文件。
+源码与构建说明见 https://ffmpeg.martin-riedl.de/ 和 https://ffmpeg.org/download.html 。

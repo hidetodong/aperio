@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "evidence_id": "html-isolation",
+  "iteration": "ITER-0014",
+  "ac_ids": [
+    "AC1",
+    "AC2",
+    "AC3",
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "npx",
+      "vitest",
+      "run",
+      "src/formats/text/HtmlFrame.test.tsx",
+      "src/formats/text/TextView.test.tsx",
+      "src/shell/ViewerFrame.test.tsx",
+      "src/open/openFile.test.ts"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-28T10:49:03.224Z",
+  "finished_at": "2026-10-28T10:49:05.086Z",
+  "duration_ms": 1862,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 455,
+    "captured_bytes": 455,
+    "sha256": "9fa6d272af564919bcec52705c2b041022cfaaff2d42738ceb735bf9e90eb17a",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

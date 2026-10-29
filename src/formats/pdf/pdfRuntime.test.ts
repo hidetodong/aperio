@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { installBase64, installIterator, installMapUpsert, installPromiseTry, type MapUpsert } from "./pdfPrelude.js";
+import { installBase64, installIterator, installMapUpsert, installPromiseTry, installSumPrecise, type MapUpsert } from "./pdfPrelude.js";
 
 describe("PDF 库在系统网页视图里缺的能力", () => {
   it("没有 Iterator 时补一个空构造函数，已有的不换掉", () => {
@@ -33,6 +33,17 @@ describe("PDF 库在系统网页视图里缺的能力", () => {
     installPromiseTry(ctor);
     await expect(ctor.try!(() => "ok")).resolves.toBe("ok");
     await expect(ctor.try!(() => { throw new Error("nope"); })).rejects.toThrow("nope");
+  });
+
+  it("没有精确求和时用加法补上，已有的不换掉", () => {
+    const math: { sumPrecise?: (values: Iterable<number>) => number } = {};
+    installSumPrecise(math);
+    expect(math.sumPrecise!([10, 20, 30])).toBe(60);
+    expect(math.sumPrecise!([])).toBe(0);
+    const kept = math.sumPrecise;
+    installSumPrecise(math);
+    expect(math.sumPrecise).toBe(kept);
+    expect(() => math.sumPrecise!(["字" as unknown as number])).toThrow(TypeError);
   });
 
   it("字节数组能转成 base64 再转回来", () => {

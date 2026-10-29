@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { familyOf, isLegacyOffice, isSkippedArchive, languageFor, textMode } from "./route";
+import { familyOf, isLegacyOffice, isSkippedArchive, languageFor, needsPlaybackPrep, textMode } from "./route";
 
 describe("扩展名归类", () => {
   it("图片和文本落到对应家族", () => {
@@ -25,7 +25,21 @@ describe("扩展名归类", () => {
     expect(isLegacyOffice("/tmp/a.doc")).toBe(true);
     expect(isLegacyOffice("/tmp/a.docx")).toBe(false);
     expect(familyOf("/tmp/a.zip")).toBe("zip");
+    for (const ext of ["bmp", "ico", "avif", "jxl", "tif", "tiff"]) {
+      expect(familyOf(`/tmp/a.${ext}`)).toBe("image");
+    }
+    expect(familyOf("/tmp/a.psd")).toBe("unknown");
     expect(familyOf("/tmp/a.mp4")).toBe("media");
+    expect(familyOf("/tmp/a.m4v")).toBe("media");
+    expect(familyOf("/tmp/a.mkv")).toBe("media");
+    expect(familyOf("/tmp/a.avi")).toBe("media");
+    expect(familyOf("/tmp/a.wmv")).toBe("media");
+    expect(familyOf("/tmp/a.webm")).toBe("unknown");
+    expect(needsPlaybackPrep("/tmp/a.WMV")).toBe(true);
+    expect(needsPlaybackPrep("/tmp/a.mkv")).toBe(true);
+    expect(needsPlaybackPrep("/tmp/a.avi")).toBe(true);
+    expect(needsPlaybackPrep("/tmp/a.webm")).toBe(false);
+    expect(needsPlaybackPrep("/tmp/a.m4v")).toBe(false);
     expect(familyOf("/tmp/a.tar")).toBe("unknown");
     expect(familyOf("/tmp/a.tar.gz")).toBe("unknown");
     expect(isSkippedArchive("/tmp/a.tar")).toBe(true);
@@ -61,6 +75,8 @@ describe("扩展名归类", () => {
       expect(textMode(`/tmp/a.${ext}`)).toBe("code");
     }
     expect(languageFor("/tmp/a.rb")).toBeNull();
+    expect(familyOf("/tmp/a.log")).toBe("unknown");
+    expect(textMode("/tmp/a.log")).toBe("plain");
     expect(textMode("/tmp/a.md")).toBe("markdown");
     expect(textMode("/tmp/a.html")).toBe("html");
     expect(textMode("/tmp/a.ts")).toBe("code");

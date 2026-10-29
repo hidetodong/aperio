@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITER-0012 交付总结 · Markdown 的图和排版</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>Markdown 的图和排版</h1>
+      <div class="meta">
+        <span class="chip id">ITER-0012</span>
+        <span class="chip level">迭代交付（小版本）</span>
+        <span class="chip date">收口 2026-10-28</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>打开 Markdown 时，跟文件放在一起的图能显示，外链图地址不被改掉，标题和表格在现有阅读栏里能看出来。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul>
+<li>相对图片按这份 Markdown 所在目录拼成路径，再交给现成的文件地址。https 地址保持原样。</li>
+<li>应用的图片名单放行 https。脚本名单没有放行。</li>
+<li>一级标题 20px，二级 17px，正文仍是 15px。表格有框线。链接用应用已有的强调色。</li>
+<li>标题和表头固定深色。文章底是白的，不再跟着深色主题变成浅字。</li>
+<li>脚本和事件属性仍会被去掉。</li>
+</ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>Markdown 里同一目录的图可以出来。标题和表格能跟正文分开。外链图不再被改成别的地址，但本机代理打不开 https 时，徽章仍会是裂图。</p>
+<p>看 Markdown 时还可以切到原文。认不出或不打开的格式，提示改成「暂不支持的文件格式」。这两件不在本轮验收里。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>动的是 Markdown 怎么出图、文章区的排版，以及图片能不能加载 https。压缩包里的 Markdown 没有磁盘目录，图片地址不动。窗口布局没改。</p>
+    </section>
+
+    
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>证据在 <code>.ai/iterations/ITER-0012/evidence/markdown-render/record.json</code>。渲染和阅读区一共 11 条通过，四条验收都盖住了。说明在 <code>.ai/iterations/ITER-0012/VERIFY_REPORT.md</code>。</p>
+<p>开发窗口里早先看过本地图和标题。那次没有另封证据。外链徽章仍是裂图。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul>
+<li>外链徽章仍可能出不来。本机 https 代理握手失败。</li>
+<li>图片名单有没有在系统窗口里生效，这次没有封成证据。</li>
+<li>打开网页文件把整窗打挂，这轮明确不做，仍然没查。里程碑里另列为下一条路线，还没开迭代。</li>
+<li>原文模式和统一的打不开文案已经写进代码，但不在这四条验收里。</li>
+<li>没有另一人复查。</li>
+</ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul>
+<li><code>.ai/iterations/ITER-0012/CONCEPT.md</code></li>
+<li><code>.ai/iterations/ITER-0012/AC_LIST.md</code></li>
+<li><code>.ai/iterations/ITER-0012/TECH_PLAN.md</code></li>
+<li><code>.ai/iterations/ITER-0012/VERIFY_REPORT.md</code></li>
+<li><code>.ai/iterations/ITER-0012/CHANGELOG.md</code></li>
+<li><code>.ai/iterations/ITER-0012/evidence/markdown-render/record.json</code></li>
+</ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

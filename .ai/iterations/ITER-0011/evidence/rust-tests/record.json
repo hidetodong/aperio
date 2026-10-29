@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_id": "rust-tests",
+  "iteration": "ITER-0011",
+  "ac_ids": [
+    "AC1",
+    "AC3"
+  ],
+  "command": {
+    "argv": [
+      "cargo",
+      "test",
+      "--manifest-path",
+      "src-tauri/Cargo.toml"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-08T06:22:10.205Z",
+  "finished_at": "2026-10-08T06:22:16.518Z",
+  "duration_ms": 6313,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 1271,
+    "captured_bytes": 1271,
+    "sha256": "a82c8fd8aa42870c4ed2b35528dccff76443eaee43e63c0e36765213f04d1bd7",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 648,
+    "captured_bytes": 648,
+    "sha256": "a88c844b66802fe06f8329e1dfb39bf3d34237f49808163c9faa67156795e710",
+    "truncated": false
+  }
+}

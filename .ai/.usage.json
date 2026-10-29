@@ -1,28 +1,28 @@
 {
   "entries": {
     "tool:artifact-pipeline": {
-      "last_used": "2026-10-03T04:04:57Z"
+      "last_used": "2026-10-28T08:02:16Z"
     },
     "tool:goal-assurance": {
-      "last_used": "2026-10-03T08:50:57Z"
+      "last_used": "2026-10-28T14:07:47Z"
     },
     "tool:handoff": {
-      "last_used": "2026-10-05T14:57:31Z"
+      "last_used": "2026-10-28T19:05:21Z"
     },
     "tool:iteration-intake": {
-      "last_used": "2026-10-03T08:31:03Z"
+      "last_used": "2026-10-28T09:52:19Z"
     },
     "tool:project-config": {
-      "last_used": "2026-09-29T15:44:23Z"
+      "last_used": "2026-10-28T08:32:52Z"
     },
     "tool:state-ledger": {
-      "last_used": "2026-10-05T14:57:31Z"
+      "last_used": "2026-10-28T09:52:19Z"
     },
     "tool:usage": {
-      "last_used": "2026-10-05T09:49:06Z"
+      "last_used": "2026-10-28T09:52:13Z"
     },
     "tool:verification-evidence": {
-      "last_used": "2026-10-05T09:49:06Z"
+      "last_used": "2026-10-28T18:48:24Z"
     },
     "workflow:dangerous": {
       "last_used": "2026-09-29T15:44:23Z"
@@ -31,7 +31,7 @@
       "last_used": "2026-09-29T06:19:53Z"
     },
     "workflow:iteration": {
-      "last_used": "2026-10-03T08:26:35Z"
+      "last_used": "2026-10-28T09:52:13Z"
     },
     "workflow:milestone": {
       "last_used": "2026-10-05T09:49:06Z"

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "evidence_id": "ffmpeg-fetch",
+  "iteration": "ITER-0010",
+  "ac_ids": [
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "node",
+      "scripts/fetch-ffmpeg.mjs"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-06T10:48:09.933Z",
+  "finished_at": "2026-10-06T10:48:10.239Z",
+  "duration_ms": 307,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 34,
+    "captured_bytes": 34,
+    "sha256": "efadbc641e65067fba65ef597ef1aac8713d3bc8ff5fac126137361aa0148f7a",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

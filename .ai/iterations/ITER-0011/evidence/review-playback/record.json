@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_id": "review-playback",
+  "iteration": "ITER-0011",
+  "ac_ids": [
+    "AC3"
+  ],
+  "command": {
+    "argv": [
+      "cargo",
+      "test",
+      "--manifest-path",
+      "src-tauri/Cargo.toml",
+      "--lib",
+      "playback::tests::sample_keeps_the_original_bytes",
+      "--",
+      "--exact"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-08T06:22:21.407Z",
+  "finished_at": "2026-10-08T06:22:22.277Z",
+  "duration_ms": 869,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 174,
+    "captured_bytes": 174,
+    "sha256": "4fd7417a147ed31b0ae64d3993a74618dd64c40966f2426cada414ee9268db59",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 165,
+    "captured_bytes": 165,
+    "sha256": "1cda291bda1d343e41ddc63be0315d6a25454fd1ba1e99f5209e4ad26eb82195",
+    "truncated": false
+  }
+}

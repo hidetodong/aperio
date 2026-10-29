@@ -1,16 +1,16 @@
 <!-- butler-artifact-template: 1.0.0 artifact=changelog -->
 # 变更流
 
-无开放迭代。
+> 无开放迭代 · — · —
 
 ## ADD
 
-- N/A
+- 无
 
 ## EDIT
 
-- N/A
+- 无
 
 ## DELETE
 
-- N/A
+- 无

@@ -1,6 +1,8 @@
 mod files;
+mod playback;
 
 use files::{decode_heic, read_text_file, require_file};
+use playback::{make_executable, output_name, prepare};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -9,7 +11,41 @@ use std::time::{SystemTime, UNIX_EPOCH};
 use tauri::image::Image;
 use tauri::menu::{Menu, MenuItem};
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
+use tauri::path::BaseDirectory;
 use tauri::{AppHandle, Manager};
+
+fn playback_publish_lock() -> &'static Mutex<u64> {
+    static SLOT: OnceLock<Mutex<u64>> = OnceLock::new();
+    SLOT.get_or_init(|| Mutex::new(0))
+}
+
+fn ffmpeg_program(app: &AppHandle) -> Result<PathBuf, String> {
+    if let Ok(path) = app.path().resolve("ffmpeg", BaseDirectory::Resource) {
+        if path.is_file() {
+            make_executable(&path)?;
+            return Ok(path);
+        }
+    }
+    let dev = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources").join("ffmpeg");
+    if dev.is_file() {
+        make_executable(&dev)?;
+        return Ok(dev);
+    }
+    Err(playback::MISSING.to_string())
+}
+
+fn remove_other_playbacks(dir: &Path, keep: &Path) {
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
+    for entry in entries.flatten() {
+        let path = entry.path();
+        let name = path.file_name().and_then(|value| value.to_str()).unwrap_or("");
+        if path != keep && name.starts_with("playback-") && name.ends_with(".mp4") {
+            let _ = fs::remove_file(path);
+        }
+    }
+}
 
 fn heic_publish_lock() -> &'static Mutex<u64> {
     static SLOT: OnceLock<Mutex<u64>> = OnceLock::new();
@@ -120,6 +156,33 @@ fn retain_cached_png(cache_dir: &Path, keep: &Path) -> Result<(), String> {
     }
     remove_other_pngs(&cache, &kept);
     Ok(())
+}
+
+#[tauri::command]
+fn prepare_playback(app: AppHandle, path: String) -> Result<String, String> {
+    let mut latest = playback_publish_lock()
+        .lock()
+        .unwrap_or_else(|err| err.into_inner());
+    let dir = app.path().app_cache_dir().map_err(|err| err.to_string())?;
+    fs::create_dir_all(&dir).map_err(|err| err.to_string())?;
+    let id = latest
+        .checked_add(1)
+        .ok_or_else(|| playback::FAIL.to_string())?;
+    let output = dir.join(output_name(id));
+    let ffmpeg = ffmpeg_program(&app)?;
+    let prepared = match prepare(&ffmpeg, Path::new(&path), &output) {
+        Ok(prepared) => prepared,
+        Err(err) => {
+            let _ = fs::remove_file(&output);
+            return Err(err);
+        }
+    };
+    remove_other_playbacks(&dir, &prepared);
+    *latest = id;
+    prepared
+        .to_str()
+        .map(str::to_string)
+        .ok_or_else(|| playback::FAIL.to_string())
 }
 
 #[tauri::command]
@@ -429,6 +492,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             read_text,
             decode_heic_image,
+            prepare_playback,
             confirm_file,
             retain_decoded_image,
             read_recents,

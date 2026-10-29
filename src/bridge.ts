@@ -23,6 +23,10 @@ export function decodeHeic(path: string): Promise<string> {
   return invoke<string>("decode_heic_image", { path });
 }
 
+export function preparePlayback(path: string): Promise<string> {
+  return invoke<string>("prepare_playback", { path });
+}
+
 export function confirmFile(path: string): Promise<void> {
   return invoke("confirm_file", { path });
 }

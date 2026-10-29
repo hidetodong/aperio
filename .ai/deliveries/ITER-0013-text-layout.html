@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITER-0013 交付总结 · 纯文本排成段落</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>纯文本排成段落</h1>
+      <div class="meta">
+        <span class="chip id">ITER-0013</span>
+        <span class="chip level">迭代交付（小版本）</span>
+        <span class="chip date">收口 2026-10-28</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>已经按纯文本打开的文件，打开后用阅读字体和段落间隔，读起来有层次。代码仍按现有语言上色。看到的文字和文件内容一致。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul>
+<li>纯文本按空行分成段落，放进文章容器。字体用界面已有的无衬线字体，字号用阅读字号，长行会换行。</li>
+<li>段与段之间的空隙和文章段落一样，是 16px。第一段顶上不另加空隙。</li>
+<li>段里的缩进和单个换行保持原样。尖括号当文字显示。</li>
+<li>代码仍按现有语言上色，并保留行号。名单没有增减。</li>
+<li>Markdown 仍默认是文章，网页仍是不允许脚本的隔离框。两套切换文案还在。纯文本没有切换。</li>
+</ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>打开 txt，以及内容是文本但认不出扩展名的文件，不再是一整块等宽原文。空行隔开的段落能分开。代码、Markdown 和网页的打开方式没改。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>动的是纯文本打开后的样子。直接打开的纯文本，以及压缩包里走同一块视图的纯文本，外观会一起变。能打开的种类没有增加。窗口布局没改。</p>
+    </section>
+
+    
+
+
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>证据在 <code>.ai/iterations/ITER-0013/evidence/plain-reading/record.json</code>。文本视图、渲染、路由和阅读顶栏一共 28 条通过，六条验收都盖住了。说明在 <code>.ai/iterations/ITER-0013/VERIFY_REPORT.md</code>。</p>
+<p>样式是读样式表核对的。系统窗口里没有再点开一份文本。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul>
+<li>系统窗口里字体顺不顺眼、专注底色好不好看，这次没有打开一份文本再看。</li>
+<li>压缩包里的纯文本会一起变成段落。压缩包列表没有改，也没有单独再测外观。</li>
+<li>没有另一人复查。</li>
+<li>打开网页失败把整窗打挂，仍是里程碑路线 R4，还没开迭代。</li>
+</ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul>
+<li><code>.ai/iterations/ITER-0013/CONCEPT.md</code></li>
+<li><code>.ai/iterations/ITER-0013/AC_LIST.md</code></li>
+<li><code>.ai/iterations/ITER-0013/TECH_PLAN.md</code></li>
+<li><code>.ai/iterations/ITER-0013/VERIFY_REPORT.md</code></li>
+<li><code>.ai/iterations/ITER-0013/CHANGELOG.md</code></li>
+<li><code>.ai/iterations/ITER-0013/evidence/plain-reading/record.json</code></li>
+</ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

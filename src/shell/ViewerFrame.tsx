@@ -421,6 +421,7 @@ export function ViewerFrame({
   const [spread, setSpread] = useState<"single" | "double">("single");
   const [ts, setTs] = useState(0);
   const [wrap, setWrap] = useState(false);
+  const [raw, setRaw] = useState(false);
   const [copied, setCopied] = useState(false);
   const [extractLabel, setExtractLabel] = useState("解压到…");
   const copyTimer = useRef(0);
@@ -433,11 +434,13 @@ export function ViewerFrame({
     setPz(100);
     setCopied(false);
     setExtractLabel("解压到…");
+    setRaw(false);
   }, [path]);
   const light = ground === "paper";
   const glass = light ? "rgba(255,255,255,.75)" : "rgba(60,60,64,.55)";
   const glassHover = light ? "rgba(0,0,0,.06)" : "rgba(255,255,255,.12)";
-  const shown = zen ? edge : chromeOn || info;
+  // 网页在内嵌框架里，鼠标移动传不到外层。顶栏一旦藏起，返回按钮就点不回来。
+  const shown = kind === "html" ? true : zen ? edge : chromeOn || info;
   const side = info ? 296 : 0;
   const stripVisible = stripOn && !zen && strip.length > 0;
   const pillBottom = stripVisible && chromeOn && !zen ? 88 : 20;
@@ -458,6 +461,7 @@ export function ViewerFrame({
     spread,
     ts,
     wrap,
+    raw,
   };
 
   useEffect(() => {
@@ -671,6 +675,16 @@ export function ViewerFrame({
               </button>
               <button type="button" className={spread === "double" && !zen ? "on" : ""} title="双页对开" onClick={() => { setSpread("double"); setPz(100); }}>
                 <PageMark two />双页
+              </button>
+            </div>
+          ) : null}
+          {kind === "markdown" || kind === "html" ? (
+            <div className="vseg">
+              <button type="button" className={raw ? "" : "on"} title={kind === "html" ? "按网页显示" : "排成文章"} onClick={() => setRaw(false)}>
+                {kind === "html" ? "渲染" : "阅读"}
+              </button>
+              <button type="button" className={raw ? "on" : ""} title="显示原文" onClick={() => setRaw(true)}>
+                原文
               </button>
             </div>
           ) : null}

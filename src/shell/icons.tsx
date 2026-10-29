@@ -48,8 +48,8 @@ const TYPE_BODY: Record<TypeIcon, string> = {
 
 function typeIconOf(name: string): TypeIcon {
   const ext = extensionOf(name);
-  if (ext === "jpg" || ext === "jpeg" || ext === "png" || ext === "gif" || ext === "webp" || ext === "svg" || ext === "heic" || ext === "heif") return "image";
-  if (ext === "mp4" || ext === "mov") return "video";
+  if (ext === "jpg" || ext === "jpeg" || ext === "png" || ext === "gif" || ext === "webp" || ext === "svg" || ext === "heic" || ext === "heif" || ext === "bmp" || ext === "ico" || ext === "avif" || ext === "jxl" || ext === "tif" || ext === "tiff") return "image";
+  if (ext === "mp4" || ext === "mov" || ext === "m4v" || ext === "mkv" || ext === "avi" || ext === "wmv") return "video";
   if (ext === "mp3") return "audio";
   if (ext === "pdf") return "pdf";
   if (ext === "doc" || ext === "docx") return "word";

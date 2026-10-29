@@ -1,14 +1,15 @@
 import { isEnabled } from "../formats/enable";
 import { OFFICE_BYTE_LIMIT } from "../formats/office/model";
 import { ZIP_BYTE_LIMIT } from "../formats/zip/model";
-import { baseName, familyOf, isHeic, isLegacyOffice, isSkippedArchive, languageFor, textMode } from "../formats/route";
-import { MSG, TEXT_LIMIT } from "../messages";
+import { baseName, familyOf, isHeic, isLegacyOffice, isSkippedArchive, languageFor, needsPlaybackPrep, textMode } from "../formats/route";
+import { MSG, TEXT_LIMIT, UNSUPPORTED_FORMAT } from "../messages";
 import type { Current } from "./session";
 
 export type FileIo = {
   readText: (path: string) => Promise<string>;
   fileUrl: (path: string) => string;
   decodeHeic: (path: string) => Promise<string>;
+  preparePlayback?: (path: string) => Promise<string>;
   confirmFile: (path: string) => Promise<void>;
   retainDecoded?: (path: string) => Promise<void>;
 };
@@ -28,7 +29,7 @@ function messageOf(error: unknown): string {
 
 export function explainFailure(error: unknown): string {
   if (typeof error === "string" && error.trim()) return error;
-  return messageOf(error) || "打不开";
+  return messageOf(error) || UNSUPPORTED_FORMAT;
 }
 
 export function assertPlainText(text: string): string {
@@ -94,9 +95,18 @@ export async function openLocalPath(path: string, io: FileIo): Promise<Opened> {
       await io.confirmFile(path);
       return { current: { kind: "office", path, name, url: io.fileUrl(path) } };
     }
-    if (family === "zip" || family === "media") {
+    if (family === "zip") {
       await io.confirmFile(path);
-      return { current: { kind: family, path, name, url: io.fileUrl(path) } };
+      return { current: { kind: "zip", path, name, url: io.fileUrl(path) } };
+    }
+    if (family === "media") {
+      await io.confirmFile(path);
+      if (needsPlaybackPrep(path)) {
+        if (!io.preparePlayback) throw new Error(MSG.playbackMissing);
+        const prepared = await io.preparePlayback(path);
+        return { current: { kind: "media", path, name, url: io.fileUrl(prepared) } };
+      }
+      return { current: { kind: "media", path, name, url: io.fileUrl(path) } };
     }
     const text = assertPlainText(await io.readText(path));
     const mode = textMode(path);

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_id": "ffmpeg-ignore",
+  "iteration": "ITER-0010",
+  "ac_ids": [
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "git",
+      "check-ignore",
+      "-v",
+      "src-tauri/resources/ffmpeg",
+      "src-tauri/resources/ffmpeg.sha256"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-06T10:48:09.954Z",
+  "finished_at": "2026-10-06T10:48:09.966Z",
+  "duration_ms": 12,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 150,
+    "captured_bytes": 150,
+    "sha256": "d0877f2b15c9b306be9e5edc0064afc0c0ad3db5b4b988e91dba0e7c6a8b4e3e",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

@@ -13,6 +13,7 @@ export type Look = {
   spread: "single" | "double";
   ts: number;
   wrap: boolean;
+  raw: boolean;
 };
 
 export const IDLE_LOOK: Look = {
@@ -27,6 +28,7 @@ export const IDLE_LOOK: Look = {
   spread: "single",
   ts: 0,
   wrap: false,
+  raw: false,
 };
 
 const LookContext = createContext<Look>(IDLE_LOOK);

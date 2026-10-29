@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "evidence_id": "frontend-tests",
+  "iteration": "ITER-0011",
+  "ac_ids": [
+    "AC1",
+    "AC2",
+    "AC4"
+  ],
+  "command": {
+    "argv": [
+      "npm",
+      "test"
+    ],
+    "cwd": "."
+  },
+  "started_at": "2026-10-08T06:22:10.205Z",
+  "finished_at": "2026-10-08T06:22:15.729Z",
+  "duration_ms": 5524,
+  "process_exit_code": 0,
+  "outcome": "passed",
+  "stdout": {
+    "path": "stdout.log",
+    "bytes": 1500,
+    "captured_bytes": 1500,
+    "sha256": "39911cc6f7ca3f6e505568fcaf12c4a4cd0f7dd8aaab7d2afedcdeb08f0f9b18",
+    "truncated": false
+  },
+  "stderr": {
+    "path": "stderr.log",
+    "bytes": 0,
+    "captured_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "truncated": false
+  }
+}

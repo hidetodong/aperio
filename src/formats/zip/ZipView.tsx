@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { explainFailure } from "../../open/openFile";
 import type { TextPayload } from "../text/TextView";
-import { MSG } from "../../messages";
+import { MSG, UNSUPPORTED_FORMAT } from "../../messages";
 import { readZip, type ZipList, type ZipPreview } from "./readZip";
 
 type ImagePane = ComponentType<{ url: string; name: string }>;
@@ -25,7 +25,7 @@ function defaultCreateUrl(bytes: Uint8Array, mime: string): string {
 
 async function loadZipFromUrl(url: string): Promise<ZipList> {
   const response = await fetch(url);
-  if (!response.ok) throw new Error("打不开");
+  if (!response.ok) throw new Error(UNSUPPORTED_FORMAT);
   return readZip(await response.arrayBuffer());
 }
 

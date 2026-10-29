@@ -3,6 +3,7 @@ import {
   confirmFile,
   decodeHeic,
   fileUrl,
+  preparePlayback,
   extractZip,
   isTauri,
   listDirectory,
@@ -50,6 +51,8 @@ type TextProps = {
   text: string;
   language?: string;
   lined?: boolean;
+  filePath?: string;
+  toFileUrl?: (absolutePath: string) => string;
 };
 
 type ImageProps = { url: string; name: string };
@@ -117,6 +120,7 @@ export default function App() {
       readText,
       fileUrl,
       decodeHeic,
+      preparePlayback,
       confirmFile,
       retainDecoded,
     });
@@ -413,7 +417,15 @@ export default function App() {
         <>
           {ImagePane && current.kind === "image" ? <ImagePane url={current.url} name={current.name} /> : null}
           {TextPane && current.kind === "text" ? (
-            <TextPane name={current.name} mode={current.mode} text={current.text} language={current.language} lined={current.mode === "code"} />
+            <TextPane
+              name={current.name}
+              mode={current.mode}
+              text={current.text}
+              language={current.language}
+              lined={current.mode === "code"}
+              filePath={current.path}
+              toFileUrl={current.mode === "markdown" && isTauri() ? fileUrl : undefined}
+            />
           ) : null}
           {PdfPane && current.kind === "pdf" ? <PdfPane url={current.url} onFail={(message) => fail(current.url, message)} /> : null}
           {OfficePane && current.kind === "office" ? (

@@ -5,9 +5,9 @@
   "version": "0.0.1",
   "identifier": "local.aperio.app",
   "build": {
-    "beforeDevCommand": "npm run dev",
+    "beforeDevCommand": "node scripts/fetch-ffmpeg.mjs && npm run dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm run build",
+    "beforeBuildCommand": "node scripts/fetch-ffmpeg.mjs && npm run build",
     "frontendDist": "../dist"
   },
   "app": {
@@ -25,7 +25,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' asset: http://asset.localhost blob: data:; img-src 'self' asset: http://asset.localhost blob: data:; media-src 'self' asset: http://asset.localhost blob: data:; font-src 'self' blob: data:; style-src 'self' 'unsafe-inline'",
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' asset: http://asset.localhost blob: data:; img-src 'self' https: asset: http://asset.localhost blob: data:; media-src 'self' asset: http://asset.localhost blob: data:; font-src 'self' blob: data:; style-src 'self' 'unsafe-inline'",
       "assetProtocol": {
         "enable": true,
         "scope": {
@@ -40,6 +40,10 @@
     "targets": "all",
     "macOS": {
       "bundleName": "Aperio"
+    },
+    "resources": {
+      "resources/ffmpeg": "ffmpeg",
+      "resources/FFMPEG_SOURCE.txt": "FFMPEG_SOURCE.txt"
     },
     "icon": [
       "icons/32x32.png",

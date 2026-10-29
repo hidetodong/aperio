@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ITER-0010 交付总结 · 第一批图片和视频格式</title>
+  <style>
+    :root {
+      --fg: #1f2328;
+      --fg-muted: #59636e;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-soft: #ddf4ff;
+      --warn: #9a6700;
+      --warn-soft: #fff8c5;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sheet { max-width: 820px; margin: 0 auto; }
+    header.delivery-head {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    header.delivery-head h1 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid transparent;
+    }
+    .chip.level { background: #eef1f5; color: var(--fg-muted); }
+    .chip.date  { background: #eef1f5; color: var(--fg-muted); }
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.75rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    section.block > h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block :is(p, ul, ol) { margin: 0.5rem 0; }
+    section.block ul, section.block ol { padding-left: 1.3rem; }
+    section.block li { margin: 0.25rem 0; }
+    section.block code { font-family: var(--mono); font-size: 0.88em;
+      background: #eef1f5; padding: 0.05rem 0.35rem; border-radius: 5px; }
+    section.risks { background: var(--warn-soft); border-color: #eed888; }
+    section.risks > h2 { border-bottom-color: #eed888; }
+    section.references { font-size: 0.92rem; }
+    section.references a { color: var(--accent); }
+    section.references code { background: #eef1f5; }
+    table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #eef1f5; }
+    footer.delivery-foot {
+      margin-top: 1.5rem; text-align: center;
+      color: var(--fg-muted); font-size: 0.8rem;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      section.block, header.delivery-head { border-color: #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="delivery-head">
+      <h1>第一批图片和视频格式</h1>
+      <div class="meta">
+        <span class="chip id">ITER-0010</span>
+        <span class="chip level">迭代交付（小版本）</span>
+        <span class="chip date">收口 2026-10-06</span>
+      </div>
+    </header>
+
+    <section class="block goal">
+      <h2>本次交付目标</h2>
+      <p>BMP、ICO、AVIF、JPEG XL 和 TIFF 能直接打开。M4V 能播。MKV 和 AVI 用构建时下载的播放组件准备临时文件再播，原文件不改。白色圆钮上的播放和暂停图标改成深色。</p>
+    </section>
+
+    <section class="block completed">
+      <h2>已完成内容</h2>
+      <ul>
+<li>图片放行 BMP、ICO、AVIF、JPEG XL（<code>.jxl</code>）、TIFF。<code>.tif</code> 和 <code>.tiff</code> 都认。这些文件直接交给窗口，不转换。</li>
+<li>M4V 交给现有播放器，不先做临时文件。</li>
+<li>MKV 和 AVI 才准备。临时文件在应用缓存里，最近打开记的是原文件。编码本身能播就只换包装，不能播才重编码。</li>
+<li>播放组件不进仓库。打开开发版或打安装包之前，按固定校验和下载一份只给 Apple 芯片的程序。缺少它时说明播放组件没装好。</li>
+<li>新图片和新视频成功打开后进最近打开。成功打开的 PDF 仍不进。</li>
+<li>白色圆钮上的图标改成深色，避免和钮面融在一起。</li>
+</ul>
+    </section>
+
+    <section class="block changes">
+      <h2>关键变更 / 用户可感知变化</h2>
+      <p>能看的图片和视频多了一批。MKV 和 AVI 会先准备再播，原文件不动。播放钮在白底上应该能看清。仓库里仍然没有那份播放程序，所以安装包要在构建时才变大。</p>
+    </section>
+
+    <section class="block impact">
+      <h2>高层影响范围</h2>
+      <p>动的是「这个文件算哪一类」、MKV 和 AVI 打开前的准备、构建前的下载，以及播放钮颜色。界面布局没改。PSD、相机原始文件、WMV、旧版 Office、tar 和 gz 仍然不支持。</p>
+    </section>
+
+    
+
+    <section class="block verification">
+      <h2>验证方式与结果摘要</h2>
+      <p>证据在 <code>.ai/iterations/ITER-0010/evidence/</code>。前端 75 条、Rust 12 条通过。短样片的原文件字节没变：H.264 的 MKV 只换包装，MPEG-4 的 AVI 重编码成 H.264。验证说明在 <code>.ai/iterations/ITER-0010/VERIFY_REPORT.md</code>。没有另开开发服务，应用窗口没打开。</p>
+    </section>
+
+    <section class="block risks">
+      <h2>已知剩余风险 / 延后事项</h2>
+      <ul>
+<li>应用窗口没打开。新图片有没有真画出来、真实的 MKV 或 AVI 在窗口里能不能播、图标肉眼是否清楚，这次都没看。</li>
+<li>短样片是生成的一秒画面，不是一份现成的成片。</li>
+<li>这次没有重新打安装包，所以没有在打好的包里再确认那份程序。</li>
+<li>不是 Apple 芯片的 Mac 不在这一步。</li>
+<li>没有另一人复查。收口用的通过只表示同一次工作里没有必须先改的问题，不是独立复查已经通过。</li>
+</ul>
+    </section>
+
+    <section class="block references">
+      <h2>引用（只引用路径，不嵌全文）</h2>
+      <ul>
+<li><code>.ai/iterations/ITER-0010/CONCEPT.md</code></li>
+<li><code>.ai/iterations/ITER-0010/AC_LIST.md</code></li>
+<li><code>.ai/iterations/ITER-0010/TECH_PLAN.md</code></li>
+<li><code>.ai/iterations/ITER-0010/VERIFY_REPORT.md</code></li>
+<li><code>.ai/iterations/ITER-0010/CHANGELOG.md</code></li>
+<li><code>.ai/iterations/ITER-0010/evidence/frontend-tests/record.json</code></li>
+<li><code>.ai/iterations/ITER-0010/evidence/rust-tests/record.json</code></li>
+<li><code>.ai/iterations/ITER-0010/evidence/ffmpeg-fetch/record.json</code></li>
+<li><code>.ai/iterations/ITER-0010/evidence/ffmpeg-ignore/record.json</code></li>
+<li><code>.ai/iterations/ITER-0010/evidence/review-playback/record.json</code></li>
+</ul>
+    </section>
+
+    <footer class="delivery-foot">
+      固定格式阅读视图 · 引用真源以同名 .md 为准 · butler delivery-summary §9
+    </footer>
+  </main>
+</body>
+</html>

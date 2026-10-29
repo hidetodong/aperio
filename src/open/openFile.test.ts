@@ -42,7 +42,7 @@ describe("打开文件", () => {
     expect(kept).toEqual(["/tmp/a.heic.png"]);
   });
 
-  it("tar 和 gz 说明先不看，不去读也不确认", async () => {
+  it("tar 和 gz 打不开，不去读也不确认", async () => {
     let reads = 0;
     let checks = 0;
     const probe = io({
@@ -199,7 +199,7 @@ describe("打开文件", () => {
     expect(late).toEqual(previous.recents);
   });
 
-  it("旧的 Word、Excel、PPT 说明先不看，不去读也不确认", async () => {
+  it("旧的 Word、Excel、PPT 打不开，不去读也不确认", async () => {
     let reads = 0;
     let checks = 0;
     const probe = io({
@@ -322,5 +322,71 @@ describe("打开文件", () => {
     expect(failOpen({ current: { kind: "image", path: "/b.png", name: "b.png", url: "asset:///b.png" }, recents: previous.recents }, "asset:///tmp/a.zip", MSG.notZip).current).toMatchObject({
       kind: "image",
     });
+  });
+
+  it("新图片直接打开，不解码", async () => {
+    let decoded = 0;
+    const opened = await openLocalPath("/tmp/画.bmp", io({
+      decodeHeic: async () => {
+        decoded += 1;
+        return "/nope.png";
+      },
+    }));
+    expect(opened.current).toMatchObject({ kind: "image", path: "/tmp/画.bmp", url: "asset:///tmp/画.bmp" });
+    expect(decoded).toBe(0);
+    const recents = recentsAfterOpen({ current: opened.current, recents: [] }, opened.current, 3);
+    expect(recents[0]?.path).toBe("/tmp/画.bmp");
+  });
+
+  it("M4V 不准备临时文件，MKV 准备后仍记原路径", async () => {
+    let prepared = 0;
+    const movie = await openLocalPath("/tmp/a.m4v", io({
+      preparePlayback: async () => {
+        prepared += 1;
+        return "/tmp/nope.mp4";
+      },
+    }));
+    expect(prepared).toBe(0);
+    expect(movie.current).toMatchObject({ kind: "media", path: "/tmp/a.m4v", url: "asset:///tmp/a.m4v" });
+
+    const wrapped = await openLocalPath("/tmp/a.mkv", io({
+      preparePlayback: async (path) => `${path}.mp4`,
+    }));
+    expect(wrapped.current).toMatchObject({
+      kind: "media",
+      path: "/tmp/a.mkv",
+      name: "a.mkv",
+      url: "asset:///tmp/a.mkv.mp4",
+    });
+    const recents = recentsAfterShown(
+      { current: wrapped.current, recents: [] },
+      "media",
+      "/tmp/a.mkv",
+      "a.mkv",
+      4,
+    );
+    expect(recents[0]?.path).toBe("/tmp/a.mkv");
+
+    const clip = await openLocalPath("/tmp/a.wmv", io({
+      preparePlayback: async (path) => `${path}.mp4`,
+    }));
+    expect(clip.current).toMatchObject({
+      kind: "media",
+      path: "/tmp/a.wmv",
+      name: "a.wmv",
+      url: "asset:///tmp/a.wmv.mp4",
+    });
+    expect(recentsAfterShown(
+      { current: clip.current, recents: [] },
+      "media",
+      "/tmp/a.wmv",
+      "a.wmv",
+      5,
+    )[0]?.path).toBe("/tmp/a.wmv");
+
+    const missing = await openLocalPath("/tmp/a.avi", io());
+    expect(missing.current).toMatchObject({ kind: "error", message: MSG.playbackMissing });
+    const missingWmv = await openLocalPath("/tmp/b.wmv", io());
+    expect(missingWmv.current).toMatchObject({ kind: "error", message: MSG.playbackMissing });
   });
 });

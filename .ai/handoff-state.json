@@ -1,37 +1,43 @@
 {
-  "handoff_sha256": "390f08bab0b2380e654ed9bdf47e6815196d3c4f385bfc1d220d8d81dcea9a06",
+  "handoff_sha256": "789965d1de8a7a1ca52c7197d88e84e69051929f7e2189770d3e79990a1c09d2",
   "schema_version": 1,
   "snapshot": {
-    "decisions": [],
+    "decisions": [
+      "网页仍用空 sandbox 的隔离框。大页面大约 800 毫秒后再写一次正文。不监听窗口尺寸。"
+    ],
     "iteration": "none",
     "milestone": "MILE-0003",
-    "next": "确认这个办法后，再点名第一批扩展名并开第一段。",
-    "phase": "无",
+    "next": "无。等下一段再开迭代。",
+    "phase": "已收口",
     "pointers": [
       ".ai/task-state.md",
       ".ai/ITERATIONS.md",
       ".ai/MILESTONES.md",
       ".ai/MILESTONE.md"
     ],
-    "risks": [],
-    "status": "先做图片和视频的更多格式。建议沿用窗口直出和系统转 PNG。办法还没定，路线先不拆。"
+    "risks": [
+      "系统窗口里的返回没有点到。",
+      "空 sandbox 以后若不被网页视图遵守，提示不会出现。",
+      "窗口拉大后隔离框不重算。800 毫秒再写一次只在本机浏览器里量过像素。"
+    ],
+    "status": "打开网页时顶栏留着。隔离属性确认仍是空字符串才放入正文，放不上只留提示。里程碑不收口。"
   },
   "sources": [
     {
       "path": ".ai/task-state.md",
-      "sha256": "ef39a1fe8ec7939645d0c6fd6b2b6a99d5d768109e06e559972851141b8936ad"
+      "sha256": "c594c94ace386b144dabe23afb5be75abb6a0db53bc2fa8c9eb4c040d1e59208"
     },
     {
       "path": ".ai/ITERATIONS.md",
-      "sha256": "20badd9e54c1ecfe21b94249f5e504f21fbbc6fa13f5b020f607d18f23d32d3b"
+      "sha256": "5cb4f8ba50498ed06822dad56785bdc426d1c6aa3398edc6f404b23c9e1f70f9"
     },
     {
       "path": ".ai/MILESTONES.md",
-      "sha256": "2adde60142ca1c6fbec584de79fd045ab43960b12374cc7f59d82e9123ff3362"
+      "sha256": "5329b4ad5c4063be886caa84802dc91c4ab13ebfd381da907f46c28af2015e63"
     },
     {
       "path": ".ai/MILESTONE.md",
-      "sha256": "78b70159d1d959029fd4d66a1e82161ff67b0b302ccea845a1aff5211be21f16"
+      "sha256": "e213828601b3f435421e501ef21365e51edcebe1246d666c68eb90b69e11a861"
     }
   ]
 }

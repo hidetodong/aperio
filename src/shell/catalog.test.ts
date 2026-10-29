@@ -9,6 +9,10 @@ describe("目录里的文件", () => {
     expect(thumbKind("笔记.md")).toBe("md");
     expect(thumbKind("main.py")).toBe("code");
     expect(thumbKind("片子.mp4")).toBe("video");
+    expect(thumbKind("封面.jxl")).toBe("image");
+    expect(thumbKind("片段.mkv")).toBe("video");
+    expect(thumbKind("老片.wmv")).toBe("video");
+    expect(thumbKind("网页.webm")).toBe("file");
     expect(thumbKind("歌.mp3")).toBe("audio");
     expect(thumbKind("包.zip")).toBe("archive");
     expect(thumbKind("表.xlsx")).toBe("office");

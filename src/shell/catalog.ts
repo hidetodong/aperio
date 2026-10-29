@@ -80,9 +80,9 @@ export const TABS: { id: string; label: string; desc: string; chip: string }[] =
 ];
 
 export const ASSOC_DESC: Record<GroupId, string> = {
-  image: "JPG · PNG · GIF · WEBP · SVG · HEIC",
+  image: "JPG · PNG · GIF · WEBP · SVG · HEIC · BMP · TIFF · AVIF",
   doc: "PDF · MD · TXT · HTML · DOCX · XLSX · PPTX · CSV",
-  media: "MP4 · MOV · MP3",
+  media: "MP4 · MOV · M4V · MKV · AVI · WMV · MP3",
   code: "JS · TS · JSON · PY · GO · RS · SQL · YAML · CSS · SH",
   archive: "ZIP",
 };
@@ -100,7 +100,7 @@ const TINT: Record<ThumbKind, [string, string]> = {
   file: ["#e4e2dd", "#6e6e73"],
 };
 
-const RASTER = new Set(["jpg", "jpeg", "png", "gif", "webp", "svg"]);
+const RASTER = new Set(["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp", "ico", "avif", "jxl", "tif", "tiff"]);
 
 export const GROUNDS = {
   ink: { bg: "#111112", fg: "#f5f5f7", light: false },
