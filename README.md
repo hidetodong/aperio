@@ -42,7 +42,7 @@ Aperio 是 Mac 上的文件查看器。文件留在原来的位置，只看，�
 | 文本 | `.md` `.markdown` `.txt` `.html` `.htm` | Markdown 会排成文章 |
 | 代码 | `.js` `.jsx` `.mjs` `.cjs` `.ts` `.tsx` `.json` `.py` `.go` `.rs` `.sql` `.yml` `.yaml` `.css` `.sh` `.bash` `.zsh` | 带颜色区分 |
 | Office | `.docx` `.xlsx` `.pptx` `.csv` | 只看内容，不还原原来的版式 |
-| 影音 | `.mp4` `.mov` `.m4v` `.mkv` `.avi` `.wmv` `.mp3` | 在应用里播放 |
+| 影音 | `.mp4` `.mov` `.m4v` `.mkv` `.avi` `.wmv` `.mp3` | MP4、MOV、M4V、MP3 直接播放。MKV、AVI、WMV 用安装包里自带的播放组件 |
 | 压缩包 | `.zip` | 列出内容，预览其中的图片、文本和 PDF，可解压到选定文件夹 |
 
 表里没写的文件，只要里面是普通文字，也会按文本打开，只是没有颜色区分。
@@ -115,6 +115,7 @@ Aperio 是 Mac 上的文件查看器。文件留在原来的位置，只看，�
 - 有密码的 zip 打不开。zip 最多列出 2000 项。里面单个文件超过 20MB 时，这一条不能预览，也不能单独取出。压缩包里的 HEIC 打不开。
 - 文本超过 2MB 时，不会整份读进来。Word、Excel、PPT、CSV 和 zip 超过 20MB 时，也不会整份打开。
 - 成功打开的 PDF 不会记到最近打开。
+- MKV、AVI、WMV 用安装包里自带的播放组件。装好之后不用再下载 FFmpeg。组件没打进包里时，这三种会提示「播放组件没装好」。
 
 ## 开发
 
@@ -124,7 +125,7 @@ Aperio 是 Mac 上的文件查看器。文件留在原来的位置，只看，�
 
 需要：
 
-- Mac
+- Apple 芯片的 Mac
 - Node.js `^20.19.0` 或 `>=22.12.0`
 - Rust stable
 - 要打安装包时，还需要 Xcode 命令行工具
@@ -146,7 +147,9 @@ npm run tauri build
 
 产物在 `src-tauri/target/release/bundle/`。这个包还不能直接发给别人安装。
 
-打开和打包前会下载一份 Apple 芯片的 FFmpeg，只为播放 MKV、AVI 和 WMV。这份程序不放进仓库。它是 GPLv3，来源写在 `src-tauri/resources/FFMPEG_SOURCE.txt`。没有它时，MKV、AVI 和 WMV 会说明播放组件没装好。MP4、MOV 和 M4V 不依赖它。
+本机开发启动和打包前，会在 Apple 芯片的 Mac 上下载一份 FFmpeg，并放进应用里。已经下载过、校验也对得上时，直接用现有的，不再下载。这份程序不放进仓库，构建按 GPL 发布，来源写在 `src-tauri/resources/FFMPEG_SOURCE.txt`。不是 Apple 芯片时，这一步会失败，安装包打不出来。
+
+装好的应用已经带上它，使用者不用再下载。它只用来播放 MKV、AVI 和 WMV。MP4、MOV、M4V 和 MP3 不依赖它。
 
 发版前跑：
 

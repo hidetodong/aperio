@@ -36,6 +36,8 @@
   --ink-selected: rgba(0, 0, 0, .06);  /* 列表 / 卡片选中 */
   --ink-selected-nav: rgba(0, 0, 0, .07); /* 侧栏选中 */
   --ink-switch-off: rgba(0, 0, 0, .12);
+  --scrollbar: rgba(0, 0, 0, .28);
+  --scrollbar-hover: rgba(0, 0, 0, .42);
 
   /* 文件类型（底 / 字） */
   --type-image-bg: #e4e2dd; --type-image-fg: #6e6e73;
